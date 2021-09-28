@@ -1,0 +1,8 @@
+{
+    "@@locale": "en",
+    "loginTitle": "Login title",
+    "@loginTitle": {
+        "description": "Login screen title.",
+        "context": "LoginScreen"
+    }
+}
