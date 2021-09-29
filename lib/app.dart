@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_manager/repositories/authentication/authentication_repository.dart';
 import 'package:grocery_manager/repositories/user/user_repository.dart';
-import 'package:grocery_manager/screens/login/login_screen.dart';
+import 'package:grocery_manager/routing/route_parser.dart';
+import 'package:grocery_manager/routing/router_delegate.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 import 'blogic/bloc/app/app_bloc.dart';
@@ -39,14 +40,21 @@ class _AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Grocery Manager',
+
+    GroceryRouterDelegate _routerDelegate = GroceryRouterDelegate(
+        appBloc: context.read<AppBloc>()
+    );
+
+    return MaterialApp.router(
+      title: 'Grocery Manager',//TODO l10n
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
-      home: const LoginScreen(),
+      routerDelegate: _routerDelegate,
+      //backButtonDispatcher: ,
+      routeInformationParser: GroceryRouteInformationParser(),
     );
   }
 }

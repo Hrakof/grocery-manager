@@ -19,3 +19,13 @@ class UserChangedEvent extends AppEvent {
   @override
   List<Object> get props => [uid];
 }
+
+class UserDataArrivedEvent extends AppEvent {
+
+  const UserDataArrivedEvent({required this.user});
+
+  final User user;
+
+  @override
+  List<Object> get props => [user];
+}
