@@ -30,6 +30,24 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+  <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyDhyo8mW9w_S_EWoidsvWqmGImilnKm5Q0",
+        authDomain: "grocery-manager-29ca6.firebaseapp.com",
+        projectId: "grocery-manager-29ca6",
+        storageBucket: "grocery-manager-29ca6.appspot.com",
+        messagingSenderId: "509360430843",
+        appId: "1:509360430843:web:2dd43c07a620cce87c1a5e"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
