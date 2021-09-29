@@ -1,4 +1,5 @@
 {
     "@@locale": "hu",
-    "loginTitle": "Bejelentkezés cím"
+    "loginTitle": "Bejelentkezés cím",
+    "homeTitle": "Főoldal cím"
 }

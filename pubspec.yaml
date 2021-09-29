@@ -16,8 +16,21 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
-
   intl: ^0.17.0
+
+  #Misc
+  double_back_to_close_app: ^2.0.1
+  equatable: ^2.0.3
+  formz: ^0.4.0
+
+  #bloc
+  bloc: ^7.2.1
+  flutter_bloc: ^7.3.0
+
+  #Firebase
+  cloud_firestore: ^2.5.3
+  firebase_auth: ^3.1.1
+  firebase_core: ^1.6.0
 
   cupertino_icons: ^1.0.2
 
@@ -25,6 +38,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  #Serialization
+  json_serializable: ^5.0.2
+  build_runner: ^2.1.2
 
   flutter_lints: ^1.0.0
 

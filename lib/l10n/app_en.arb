@@ -4,5 +4,10 @@
     "@loginTitle": {
         "description": "Login screen title.",
         "context": "LoginScreen"
+    },
+    "homeTitle": "Home title",
+    "@homeTitle": {
+        "description": "Home screen title.",
+        "context": "HomeScreen"
     }
 }
