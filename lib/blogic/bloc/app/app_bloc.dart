@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:projekt/blogic/models/user.dart';
-import 'package:projekt/repositories/authentication/authentication_repository.dart';
-import 'package:projekt/repositories/user/user_repository.dart';
+import 'package:grocery_manager/blogic/models/user.dart';
+import 'package:grocery_manager/repositories/authentication/authentication_repository.dart';
+import 'package:grocery_manager/repositories/user/user_repository.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';

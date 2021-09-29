@@ -1,5 +1,5 @@
 import 'package:formz/formz.dart';
-import 'package:projekt/blogic/bloc/authentication/formz_inputs/password.dart';
+import 'package:grocery_manager/blogic/bloc/authentication/formz_inputs/password.dart';
 
 enum PasswordVerificationError { doesNotMatch }
 

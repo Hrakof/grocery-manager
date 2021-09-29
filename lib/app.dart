@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projekt/repositories/authentication/authentication_repository.dart';
-import 'package:projekt/repositories/user/user_repository.dart';
-import 'package:projekt/screens/login/login_screen.dart';
+import 'package:grocery_manager/repositories/authentication/authentication_repository.dart';
+import 'package:grocery_manager/repositories/user/user_repository.dart';
+import 'package:grocery_manager/screens/login/login_screen.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 import 'blogic/bloc/app/app_bloc.dart';
@@ -10,14 +10,11 @@ import 'blogic/bloc/app/app_bloc.dart';
 class MyApp extends StatelessWidget {
 
   final UserRepository _userRepo = UserRepository();
-  late AuthenticationRepository _authRepo;
+  late final AuthenticationRepository _authRepo;
 
   MyApp({Key? key}) : super(key: key){
     _authRepo = AuthenticationRepository(_userRepo);
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
