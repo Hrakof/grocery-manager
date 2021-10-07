@@ -37,7 +37,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           return;
         }
         if(state is UnAuthenticatedAppState){
-          _userSubscription = _userRepo.userStream(event.uid).listen((user) {
+          _userSubscription = _userRepo.getUserStream(event.uid).listen((user) {
             add(UserDataArrivedEvent(user: user));
           });
         }

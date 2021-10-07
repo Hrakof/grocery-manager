@@ -8,16 +8,18 @@ class Household extends Equatable{
 
   final String id;
   final String name;
+  final String ownerUid;
 
   const Household({
-    required this.name,
     required this.id,
+    required this.name,
+    required this.ownerUid,
   });
 
   factory Household.fromJson(Map<String, dynamic> json) => _$HouseholdFromJson(json);
   Map<String, dynamic> toJson() => _$HouseholdToJson(this);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, ownerUid];
 
 }

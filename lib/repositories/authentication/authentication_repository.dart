@@ -46,10 +46,11 @@ class AuthenticationRepository {
         email: email,
         password: password,
       );
-      await _userRepository.createUser(User(
+      await _userRepository.updateUser(User(
           id: credential.user!.uid,
           email: email,
-          displayName: displayName
+          displayName: displayName,
+          householdIds: const [],
       ));
     } on firebase.FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
