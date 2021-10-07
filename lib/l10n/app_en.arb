@@ -62,5 +62,24 @@
     "invalidDisplayName": "Invalid name",
         "@invalidDisplayName": {
             "description": "Invalid display name error message."
+        },
+    "createHouseHoldDialogTitle": "Create new household",
+        "@createHouseHoldDialogTitle": {
+            "description": "Household creation dialog title.",
+            "context": "HouseholdScreen"
+
+        },
+    "nameLabel": "Name",
+        "@nameLabel": {
+            "description": "Name label."
+        },
+    "cancelButtonText": "CANCEL",
+        "@cancelButtonText": {
+            "description": "Cancel button text."
+        },
+    "houseHoldsScreenTitle": "Households",
+        "@houseHoldsScreenTitle": {
+            "description": "Households screen title.",
+            "context": "HouseholdScreen"
         }
 }

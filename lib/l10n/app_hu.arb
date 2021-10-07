@@ -13,5 +13,9 @@
     "passwordsDontMatch": "A jelszavak nem egyeznek meg",
     "invalidPassword": "Érvénytelen jelszó",
     "invalidEmail": "Érvénytelen email",
-    "invalidDisplayName": "Érvénytelen név"
+    "invalidDisplayName": "Érvénytelen név",
+    "createHouseHoldDialogTitle": "Új háztartás létrehozása",
+    "nameLabel": "Név",
+    "cancelButtonText": "MÉGSE",
+    "houseHoldsScreenTitle": "Háztartások"
 }

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:grocery_manager/blogic/bloc/app/app_bloc.dart';
 import 'package:grocery_manager/routing/route_parser.dart';
-import 'package:grocery_manager/screens/home/home_screen.dart';
+import 'package:grocery_manager/screens/households/households_screen.dart';
 import 'package:grocery_manager/screens/login/login_screen.dart';
 
 class GroceryRouterDelegate extends RouterDelegate<RouteEnum>
@@ -34,8 +34,8 @@ class GroceryRouterDelegate extends RouterDelegate<RouteEnum>
       key: navigatorKey,
       pages: [
         if (_savedAppState is AuthenticatedAppState) const MaterialPage(
-          key: ValueKey('HomePage'),
-          child: HomeScreen(),
+          key: ValueKey('HouseholdsPage'),
+          child: HouseholdsScreen(),
         ),
         if (_savedAppState is UnAuthenticatedAppState) const MaterialPage(
           key: ValueKey('LoginPage'),
