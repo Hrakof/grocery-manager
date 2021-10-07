@@ -2,7 +2,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
-import 'package:grocery_manager/blogic/models/user.dart';
+import 'package:grocery_manager/models/user/user.dart';
 import 'package:grocery_manager/repositories/user/user_repository.dart';
 
 class LoginException implements Exception {

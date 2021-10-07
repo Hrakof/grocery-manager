@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:grocery_manager/blogic/models/user.dart';
+import 'package:grocery_manager/models/user/user.dart';
 import 'package:grocery_manager/repositories/authentication/authentication_repository.dart';
 import 'package:grocery_manager/repositories/user/user_repository.dart';
 

@@ -1,6 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:grocery_manager/blogic/models/user.dart';
+import 'package:grocery_manager/models/user/user.dart';
 
 class UserRepository {
 
