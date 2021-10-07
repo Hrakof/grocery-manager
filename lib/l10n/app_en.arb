@@ -1,13 +1,66 @@
 {
     "@@locale": "en",
-    "loginTitle": "Login title",
-    "@loginTitle": {
-        "description": "Login screen title.",
-        "context": "LoginScreen"
-    },
-    "homeTitle": "Home title",
-    "@homeTitle": {
-        "description": "Home screen title.",
-        "context": "HomeScreen"
-    }
+    "loginTitle": "Login",
+        "@loginTitle": {
+            "description": "Login screen title.",
+            "context": "LoginScreen"
+        },
+    "signUpTitle": "Sign up",
+        "@signUpTitle": {
+            "description": "Sign up screen title.",
+            "context": "SignUpScreen"
+        },
+    "homeTitle": "Home",
+        "@homeTitle": {
+            "description": "Home screen title.",
+            "context": "HomeScreen"
+        },
+    "tapBackAgainToLeave": "Tap back again to leave!",
+        "@tapBackAgainToLeave": {
+            "description": "Close app confirmation text."
+        },
+    "emailLabel": "Email",
+        "@emailLabel": {
+            "description": "Email input label."
+        },
+    "passwordLabel": "Password",
+        "@passwordLabel": {
+            "description": "Password input label."
+        },
+    "loginButtonText": "LOGIN",
+        "@loginButtonText": {
+            "description": "Login button text.",
+            "context": "LoginScreen"
+        },
+    "signUpButtonText": "SIGN UP",
+        "@signUpButtonText": {
+            "description": "Sign up button text."
+        },
+    "displayNameLabel": "Display name",
+        "@displayNameLabel": {
+            "description": "Display name label.",
+            "context": "SignUpScreen"
+        },
+    "passwordAgainLabel": "Password again",
+        "@passwordAgainLabel": {
+            "description": "Password again label.",
+            "context": "SignUpScreen"
+        },
+    "passwordsDontMatch": "Passwords don't match",
+        "@passwordsDontMatch": {
+            "description": "Passwords don't match error message.",
+            "context": "SignUpScreen"
+        },
+    "invalidPassword": "Invalid password",
+        "@invalidPassword": {
+            "description": "Invalid password error message."
+        },
+    "invalidEmail": "Invalid email",
+        "@invalidEmail": {
+            "description": "Invalid email error message."
+        },
+    "invalidDisplayName": "Invalid name",
+        "@invalidDisplayName": {
+            "description": "Invalid display name error message."
+        }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:formz/formz.dart';
 import 'package:grocery_manager/blogic/bloc/authentication/formz_inputs/verify_password.dart';
 import 'package:grocery_manager/blogic/bloc/authentication/signup/sign_up_cubit.dart';
@@ -11,8 +12,9 @@ class SignUpScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign up'),),
+      appBar: AppBar(title: Text(l10n.signUpTitle),),
       body: BlocProvider(
         create: (_) => SignUpCubit( context.read<AuthenticationRepository>() ),
         child: Padding(
@@ -61,6 +63,7 @@ class _SignUpForm extends StatelessWidget {
 class _EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state){
         return TextField(
@@ -68,9 +71,9 @@ class _EmailInput extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             icon: const Icon(Icons.email),
-            labelText: 'Email',
+            labelText: l10n.emailLabel,
             helperText: '',
-            errorText: state.email.invalid ? 'Invalid email' : null,
+            errorText: state.email.invalid ? l10n.invalidEmail : null,
           ),
         );
       },
@@ -81,15 +84,16 @@ class _EmailInput extends StatelessWidget {
 class _DisplayNameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state){
         return TextField(
           onChanged: (value){ context.read<SignUpCubit>().displayNameChanged(value); },
           decoration: InputDecoration(
             icon: const Icon(Icons.book), //TODO jobb icon
-            labelText: 'Display name',
+            labelText: l10n.displayNameLabel,
             helperText: '',
-            errorText: state.displayName.invalid ? 'Invalid name' : null,
+            errorText: state.displayName.invalid ? l10n.invalidDisplayName : null,
           ),
         );
       },
@@ -100,6 +104,7 @@ class _DisplayNameInput extends StatelessWidget {
 class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state){
         return TextField(
@@ -107,9 +112,9 @@ class _PasswordInput extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             icon: const Icon(Icons.lock),
-            labelText: 'Password',
+            labelText: l10n.passwordLabel,
             helperText: '',
-            errorText: state.password.invalid ? 'Invalid password' : null,
+            errorText: state.password.invalid ? l10n.invalidPassword : null,
           ),
         );
       },
@@ -120,6 +125,7 @@ class _PasswordInput extends StatelessWidget {
 class _VerifyPasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state){
         return TextField(
@@ -127,19 +133,19 @@ class _VerifyPasswordInput extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             icon: const Icon(Icons.lock),
-            labelText: 'Password again',
+            labelText: l10n.passwordAgainLabel,
             helperText: '',
-            errorText: state.verifyPassword.invalid ? _getErrorMessage(state.verifyPassword) : null,
+            errorText: state.verifyPassword.invalid ? _getErrorMessage(l10n, state.verifyPassword) : null,
           ),
         );
       },
     );
   }
 
-  String _getErrorMessage( VerifyPassword verifyPassword ){
+  String _getErrorMessage(L10n l10n, VerifyPassword verifyPassword ){
     switch(verifyPassword.error){
       case PasswordVerificationError.doesNotMatch:
-        return "Passwords don't match";
+        return l10n.passwordsDontMatch;
       case null:
         return '';
     }
@@ -149,11 +155,12 @@ class _VerifyPasswordInput extends StatelessWidget {
 class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state) {
         return ElevatedButton(
           onPressed: state.status.isValid ? () { context.read<SignUpCubit>().signUp(); } : null,
-          child: const Text('SIGN UP'),
+          child: Text(l10n.signUpButtonText),
         );
       },
     );

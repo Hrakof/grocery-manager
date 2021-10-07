@@ -1,5 +1,17 @@
 {
     "@@locale": "hu",
     "loginTitle": "Bejelentkezés cím",
-    "homeTitle": "Főoldal cím"
+    "homeTitle": "Főoldal cím",
+    "signUpTitle": "Regisztráció",
+    "tapBackAgainToLeave": "Kilépéshez nyomd meg újra!",
+    "emailLabel": "Email",
+    "passwordLabel": "Jelszó",
+    "loginButtonText": "BELÉPÉS",
+    "signUpButtonText": "REGISZTRÁCIÓ",
+    "displayNameLabel": "Felhasználónév",
+    "passwordAgainLabel": "Jelszó újra",
+    "passwordsDontMatch": "A jelszavak nem egyeznek meg",
+    "invalidPassword": "Érvénytelen jelszó",
+    "invalidEmail": "Érvénytelen email",
+    "invalidDisplayName": "Érvénytelen név"
 }

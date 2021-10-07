@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.loginTitle),),
       body: DoubleBackToCloseApp(
-        snackBar: const SnackBar(content: Text('Tap back again to leave')),
+        snackBar: SnackBar(content: Text(l10n.tapBackAgainToLeave)),
         child: BlocProvider(
           create: (_) => LoginCubit( context.read<AuthenticationRepository>() ),
           child: Padding(
@@ -72,6 +72,7 @@ class _LoginForm extends StatelessWidget {
 class _EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state){
         return TextField(
@@ -79,9 +80,9 @@ class _EmailInput extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             icon: const Icon(Icons.email),
-            labelText: 'Email',
+            labelText: l10n.emailLabel,
             helperText: '',
-            errorText: state.email.invalid ? 'Invalid email' : null,
+            errorText: state.email.invalid ? l10n.invalidEmail : null,
           ),
         );
       },
@@ -92,6 +93,7 @@ class _EmailInput extends StatelessWidget {
 class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state){
         return TextField(
@@ -99,9 +101,9 @@ class _PasswordInput extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             icon: const Icon(Icons.lock),
-            labelText: 'Password',
+            labelText: l10n.passwordLabel,
             helperText: '',
-            errorText: state.password.invalid ? 'Invalid password' : null,
+            errorText: state.password.invalid ? l10n.invalidPassword : null,
           ),
         );
       },
@@ -112,12 +114,13 @@ class _PasswordInput extends StatelessWidget {
 class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return BlocBuilder<LoginCubit, LoginState>(
         buildWhen: (previousState, state){ return previousState.status != state.status; },
         builder: (context, state){
           return ElevatedButton(
             onPressed: state.status.isValidated ? (){ context.read<LoginCubit>().login(); } : null,
-            child: const Text('LOGIN'),
+            child: Text(l10n.loginButtonText),
           );
         }
     );
@@ -127,13 +130,14 @@ class _LoginButton extends StatelessWidget {
 class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return ElevatedButton(
       onPressed: (){
         Navigator.push(context, MaterialPageRoute(builder: (context){
           return const SignUpScreen();
         }));
       },
-      child: const Text('SIGN UP'),
+      child: Text(l10n.signUpButtonText),
     );
   }
 }
