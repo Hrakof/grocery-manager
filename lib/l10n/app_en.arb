@@ -81,5 +81,24 @@
         "@houseHoldsScreenTitle": {
             "description": "Households screen title.",
             "context": "HouseholdScreen"
+        },
+    "logOutMenuItemText": "Log out",
+        "@logOutMenuItemText": {
+            "description": "Log Out Menu Item Text."
+        },
+    "cartTabTitle": "Cart",
+        "@cartTabTitle": {
+            "description": "Cart tab title.",
+            "context": "HouseholdDetailsScreen"
+        },
+    "fridgeTabTitle": "Fridge",
+        "@fridgeTabTitle": {
+            "description": "Fridge tab title.",
+            "context": "HouseholdDetailsScreen"
+        },
+    "membersTabTitle": "Members",
+        "@membersTabTitle": {
+            "description": "Members tab title.",
+            "context": "HouseholdDetailsScreen"
         }
 }

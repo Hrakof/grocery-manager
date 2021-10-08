@@ -5,6 +5,8 @@ import 'package:grocery_manager/blogic/bloc/app/app_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_manager/blogic/provider/households/households_state.dart';
 import 'package:grocery_manager/repositories/household/household_repository.dart';
+import 'package:grocery_manager/screens/household_details/household_details_screen.dart';
+import 'package:grocery_manager/widgets/options_menu.dart';
 import 'package:provider/provider.dart';
 
 class HouseholdsScreen extends StatelessWidget {
@@ -21,6 +23,10 @@ class HouseholdsScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(l10n.houseHoldsScreenTitle),
+            actions: const [
+              OptionsMenu(),
+              SizedBox(width: 20),
+            ],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: (){ _createHouseholdWithDialog(context); },
@@ -30,15 +36,9 @@ class HouseholdsScreen extends StatelessWidget {
             snackBar: SnackBar(content: Text(l10n.tapBackAgainToLeave)),
             child: Center(
               child: Column(
-                children: [
-                  const Text('Households'),
-                  const _HouseholdList(),
-                  ElevatedButton(
-                    child: const Text('Log out'),
-                    onPressed: () {
-                      context.read<AppBloc>().add(LogoutRequestedEvent());
-                    },
-                  ),
+                children: const [
+                  Text('Households'),
+                  _HouseholdList(),
                 ],
               ),
             ),
@@ -97,7 +97,15 @@ class _HouseholdList extends StatelessWidget {
         itemCount: households.length,
         shrinkWrap: true,
         itemBuilder: (context, idx){
-          return Center(child: Text(households[idx].name));
+          final household = households[idx];
+          return GestureDetector(
+            onTap: () => Navigator.push(context, MaterialPageRoute(
+              builder: (context) => HouseholdDetailsScreen(household: household)
+            )),
+            child: Center(
+              child: Text(household.name)
+            )
+          );
         }
       );
     }
