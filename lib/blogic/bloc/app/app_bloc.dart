@@ -26,25 +26,22 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       add(UserChangedEvent(uid: uid));
     });
 
-    on<AppEvent>((event, emit) {
-      if ( event is LogoutRequestedEvent){
-        _authRepo.logout();
+    on<LogoutRequestedEvent>((event, emit) {
+      _authRepo.logout();
+    });
+    on<UserChangedEvent>((event, emit) {
+      _userSubscription?.cancel();
+      if( event.uid == ""){
+        emit(const UnAuthenticatedAppState());
       }
-      else if( event is UserChangedEvent){
-        if( event.uid == ""){
-          _userSubscription?.cancel();
-          emit(const UnAuthenticatedAppState());
-          return;
-        }
-        if(state is UnAuthenticatedAppState){
-          _userSubscription = _userRepo.getUserStream(event.uid).listen((user) {
-            add(UserDataArrivedEvent(user: user));
-          });
-        }
+      else {
+        _userSubscription = _userRepo.getUserStream(event.uid).listen((user) {
+          add(UserDataArrivedEvent(user: user));
+        });
       }
-      else if (event is UserDataArrivedEvent){
+    });
+    on<UserDataArrivedEvent>((event, emit) {
         emit(AuthenticatedAppState(currentUser: event.user));
-      }
     });
   }
 
