@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grocery_manager/repositories/authentication/authentication_repository.dart';
-import 'package:grocery_manager/repositories/household/household_repository.dart';
-import 'package:grocery_manager/repositories/user/user_repository.dart';
+
+import 'package:grocery_manager/repositories/repositories.dart';
 import 'package:grocery_manager/routing/route_parser.dart';
 import 'package:grocery_manager/routing/router_delegate.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -25,6 +24,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider.value(value: _authRepo),
         RepositoryProvider.value(value: _userRepo),
         RepositoryProvider(create: (_) => HouseholdRepository()),
+        RepositoryProvider(create: (_) => ItemRepository()),
       ],
       child: BlocProvider(
         create: (_) => AppBloc(authenticationRepository: _authRepo, userRepository: _userRepo),
@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
 
 }
 
