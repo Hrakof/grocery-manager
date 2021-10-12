@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_manager/blogic/provider/households/household_details_state.dart';
 import 'package:grocery_manager/models/household/household.dart';
+import 'package:grocery_manager/repositories/household/household_repository.dart';
 import 'package:grocery_manager/screens/household_details/tabs/cart_tab.dart';
 import 'package:grocery_manager/screens/household_details/tabs/fridge_tab.dart';
 import 'package:grocery_manager/screens/household_details/tabs/members_tab.dart';
@@ -11,9 +12,9 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class HouseholdDetailsScreen extends StatelessWidget {
 
-  final Household _selectedHouseHold;
-  const HouseholdDetailsScreen({required Household household, Key? key}):
-      _selectedHouseHold = household,
+  final String _selectedHouseHoldId;
+  const HouseholdDetailsScreen({required String householdId, Key? key}):
+        _selectedHouseHoldId = householdId,
       super(key: key);
 
 
@@ -22,24 +23,27 @@ class HouseholdDetailsScreen extends StatelessWidget {
     final l10n = L10n.of(context)!;
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(_selectedHouseHold.name),
-          actions: const [
-            OptionsMenu(),
-            SizedBox(width: 20),
-          ],
-          bottom: TabBar(
-            tabs: [
-              Tab(text: l10n.cartTabTitle),
-              Tab(text: l10n.fridgeTabTitle),
-              Tab(text: l10n.membersTabTitle),
+      child: ChangeNotifierProvider(
+        create: (BuildContext context) => HouseholdDetailsState(householdId: _selectedHouseHoldId, householdRepository: context.read<HouseholdRepository>()),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Selector<HouseholdDetailsState, String>(
+              selector: (_, state) => state.household?.name ?? 'Unknown',
+              builder: (_, name, __) => Text(name),
+            ),
+            actions: const [
+              OptionsMenu(),
+              SizedBox(width: 20),
             ],
+            bottom: TabBar(
+              tabs: [
+                Tab(text: l10n.cartTabTitle),
+                Tab(text: l10n.fridgeTabTitle),
+                Tab(text: l10n.membersTabTitle),
+              ],
+            ),
           ),
-        ),
-        body: Provider(
-          create: (BuildContext context) => HouseholdDetailsState(_selectedHouseHold),
-          child: const TabBarView(
+          body: const TabBarView(
             //physics: const NeverScrollableScrollPhysics(),
             children: [
               CartTab(),

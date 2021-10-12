@@ -100,5 +100,10 @@
         "@membersTabTitle": {
             "description": "Members tab title.",
             "context": "HouseholdDetailsScreen"
+        },
+    "unknownHouseholdName": "Unknown",
+        "@unknownHouseholdName": {
+            "description": "Unknown household name",
+            "context": "HouseholdDetailsScreen"
         }
 }

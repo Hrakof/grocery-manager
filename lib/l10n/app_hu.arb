@@ -21,5 +21,6 @@
     "logOutMenuItemText": "Kijelentkezés",
     "cartTabTitle": "Kosár",
     "fridgeTabTitle": "Hűtő",
-    "membersTabTitle": "Tagok"
+    "membersTabTitle": "Tagok",
+    "unknownHouseholdName": "Ismeretlen"
 }

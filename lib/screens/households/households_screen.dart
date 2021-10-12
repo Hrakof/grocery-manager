@@ -98,13 +98,13 @@ class _HouseholdList extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (context, idx){
           final household = households[idx];
-          return GestureDetector(
-            onTap: () => Navigator.push(context, MaterialPageRoute(
-              builder: (context) => HouseholdDetailsScreen(household: household)
-            )),
-            child: Center(
-              child: Text(household.name)
-            )
+          return Center(
+            child: ElevatedButton(
+                onPressed: () => Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => HouseholdDetailsScreen(householdId: household.id)
+                )),
+                child: Text(household.name),
+            ),
           );
         }
       );
