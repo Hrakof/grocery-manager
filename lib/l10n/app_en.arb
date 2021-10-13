@@ -110,5 +110,54 @@
         "@itemCreationTitle": {
             "description": "Item creation screen title.",
             "context": "ItemCreationScreen"
+        },
+    "nameLabel": "Name",
+        "@nameLabel": {
+            "description": "Name label for textfield.",
+            "context": "ItemCreationScreen"
+        },
+    "tooShort": "Too short",
+        "@tooShort": {
+            "description": "Too short."
+        },
+    "amountLabel": "Amount",
+        "@amountLabel": {
+            "description": "Amount label for textfield.",
+            "context": "ItemCreationScreen"
+        },
+    "notANumber": "Not a number",
+        "@notANumber": {
+            "description": "Not a number error text.",
+            "context": "ItemCreationScreen"
+        },
+    "cantBeNegative": "Can't be negative",
+        "@cantBeNegative": {
+            "description": "Can't be negative error text.",
+            "context": "ItemCreationScreen"
+        },
+    "unitLabel": "Unit (optional)",
+        "@unitLabel": {
+            "description": "Unit label for textfield.",
+            "context": "ItemCreationScreen"
+        },
+    "tooLong": "Too long",
+        "@tooLong": {
+            "description": "Too long error text.",
+            "context": "ItemCreationScreen"
+        },
+    "descriptionLabel": "Description (optional)",
+        "@descriptionLabel": {
+            "description": "Description label for textfield.",
+            "context": "ItemCreationScreen"
+        },
+    "createItemButtonText": "Create",
+        "@createItemButtonText": {
+            "description": "Create item button text.",
+            "context": "ItemCreationScreen"
+        },
+    "createItemFailedMessage": "Failed to create item",
+        "@createItemFailedMessage": {
+            "description": "Message to be sent, when item creation fails.",
+            "context": "ItemCreationScreen"
         }
 }

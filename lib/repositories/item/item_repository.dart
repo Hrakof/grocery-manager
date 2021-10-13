@@ -33,8 +33,10 @@ class ItemRepository{
   }
 
   Future<void> updateItem(String householdId, ItemCollection itemCollection, Item item) async {
-    final docRef = _getCollectionReference(householdId, itemCollection).doc(item.id);
-    await docRef.set(item);
+    await FirebaseFirestore.instance.runTransaction((transaction) async {
+      final docRef = _getCollectionReference(householdId, itemCollection).doc(item.id);
+      transaction.set(docRef, item);
+    });
   }
 
   Stream<Item> itemStream(String householdId, ItemCollection itemCollection, String itemId) {

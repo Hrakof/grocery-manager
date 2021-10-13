@@ -23,5 +23,15 @@
     "fridgeTabTitle": "Hűtő",
     "membersTabTitle": "Tagok",
     "unknownHouseholdName": "Ismeretlen",
-    "itemCreationTitle": "Új tétel"
+    "itemCreationTitle": "Új tétel",
+    "nameLabel": "Név",
+    "tooShort": "Túl rövid",
+    "amountLabel": "Mennyiség",
+    "notANumber": "Nem szám",
+    "cantBeNegative": "Nem lehet negatív",
+    "unitLabel": "Mértékegység (opcionális)",
+    "tooLong": "Túl hosszú",
+    "descriptionLabel": "Leírás (opcionális)",
+    "createItemButtonText": "Létrehoz",
+    "createItemFailedMessage": "Tétel létrehozása sikertelen"
 }
