@@ -105,5 +105,10 @@
         "@unknownHouseholdName": {
             "description": "Unknown household name",
             "context": "HouseholdDetailsScreen"
+        },
+    "itemCreationTitle": "New item",
+        "@itemCreationTitle": {
+            "description": "Item creation screen title.",
+            "context": "ItemCreationScreen"
         }
 }

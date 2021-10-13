@@ -22,5 +22,6 @@
     "cartTabTitle": "Kosár",
     "fridgeTabTitle": "Hűtő",
     "membersTabTitle": "Tagok",
-    "unknownHouseholdName": "Ismeretlen"
+    "unknownHouseholdName": "Ismeretlen",
+    "itemCreationTitle": "Új tétel"
 }

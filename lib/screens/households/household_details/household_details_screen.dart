@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_manager/blogic/provider/households/household_details_state.dart';
-import 'package:grocery_manager/models/household/household.dart';
 import 'package:grocery_manager/repositories/household/household_repository.dart';
-import 'package:grocery_manager/screens/household_details/tabs/cart_tab.dart';
-import 'package:grocery_manager/screens/household_details/tabs/fridge_tab.dart';
-import 'package:grocery_manager/screens/household_details/tabs/members_tab.dart';
+import 'package:grocery_manager/repositories/item/item_repository.dart';
+import 'package:grocery_manager/screens/households/household_details/tabs/cart_tab.dart';
+import 'package:grocery_manager/screens/households/household_details/tabs/fridge_tab.dart';
+import 'package:grocery_manager/screens/households/household_details/tabs/members_tab.dart';
 import 'package:grocery_manager/widgets/options_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -24,11 +24,15 @@ class HouseholdDetailsScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: ChangeNotifierProvider(
-        create: (BuildContext context) => HouseholdDetailsState(householdId: _selectedHouseHoldId, householdRepository: context.read<HouseholdRepository>()),
+        create: (BuildContext context) => HouseholdDetailsState(
+            householdId: _selectedHouseHoldId,
+            householdRepository: context.read<HouseholdRepository>(),
+            itemRepository: context.read<ItemRepository>()
+        ),
         child: Scaffold(
           appBar: AppBar(
             title: Selector<HouseholdDetailsState, String>(
-              selector: (_, state) => state.household?.name ?? 'Unknown',
+              selector: (_, state) => state.household?.name ?? l10n.unknownHouseholdName,
               builder: (_, name, __) => Text(name),
             ),
             actions: const [

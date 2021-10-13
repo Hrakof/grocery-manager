@@ -5,9 +5,10 @@ import 'package:grocery_manager/blogic/bloc/app/app_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_manager/blogic/provider/households/households_state.dart';
 import 'package:grocery_manager/repositories/household/household_repository.dart';
-import 'package:grocery_manager/screens/household_details/household_details_screen.dart';
 import 'package:grocery_manager/widgets/options_menu.dart';
 import 'package:provider/provider.dart';
+
+import 'household_details/household_details_screen.dart';
 
 class HouseholdsScreen extends StatelessWidget {
   const HouseholdsScreen({Key? key}) : super(key: key);

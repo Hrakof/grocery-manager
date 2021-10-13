@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:grocery_manager/blogic/bloc/app/app_bloc.dart';
 import 'package:grocery_manager/routing/route_parser.dart';
+import 'package:grocery_manager/screens/authentication/login/login_screen.dart';
 import 'package:grocery_manager/screens/households/households_screen.dart';
-import 'package:grocery_manager/screens/login/login_screen.dart';
 
 class GroceryRouterDelegate extends RouterDelegate<RouteEnum>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {

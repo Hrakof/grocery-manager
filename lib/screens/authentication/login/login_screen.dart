@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:formz/formz.dart';
 import 'package:grocery_manager/blogic/bloc/authentication/login/login_cubit.dart';
 import 'package:grocery_manager/repositories/authentication/authentication_repository.dart';
-import 'package:grocery_manager/screens/sign_up/sign_up_screen.dart';
+import 'package:grocery_manager/screens/authentication/sign_up/sign_up_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
