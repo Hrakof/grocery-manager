@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_manager/blogic/provider/households/household_details_state.dart';
 import 'package:grocery_manager/models/household/household.dart';
-import 'package:grocery_manager/models/item/item.dart';
 import 'package:grocery_manager/repositories/item/item_repository.dart';
 import 'package:grocery_manager/screens/items/item_creation/item_creation_screen.dart';
 import 'package:grocery_manager/widgets/item_list.dart';
@@ -12,19 +11,21 @@ class CartTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<HouseholdDetailsState>();
     return Stack(
       children: [
-        Selector<HouseholdDetailsState, List<Item>?>(
-          selector: (_, state) => state.cartItems,
-          builder: (_, cartItems, __){
-            if(cartItems == null){
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return ItemList(cartItems);
-          },
-        ),
+        state.cartItems == null ?
+          const Center(
+              child: CircularProgressIndicator(),
+          )
+            :
+          ItemList(
+            state.cartItems!,
+            checkedItemIds: state.selectedCartItemIds,
+            onItemChecked: (item){
+              context.read<HouseholdDetailsState>().itemChecked(item.id, ItemCollection.cart);
+            },
+          ),
         Selector<HouseholdDetailsState, Household?>(
           selector: (_, state) => state.household,
           builder: (_, household, __){

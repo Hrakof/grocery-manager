@@ -13,9 +13,10 @@ class HouseholdDetailsState with ChangeNotifier {
   final ItemRepository _itemRepository;
 
   Household? household;
-  //TODO handle item selection
   List<Item>? cartItems;
+  final List<String> selectedCartItemIds = [];
   List<Item>? fridgeItems;
+  final List<String> selectedFridgeItemIds= [];
 
   final List<StreamSubscription> _streamSubs = [];
 
@@ -37,7 +38,25 @@ class HouseholdDetailsState with ChangeNotifier {
     }));
   }
 
-
+  void itemChecked(String itemId, ItemCollection itemCollection){
+    switch (itemCollection) {
+      case ItemCollection.cart:
+        if(selectedCartItemIds.contains(itemId)){
+          selectedCartItemIds.remove(itemId);
+        }else{
+          selectedCartItemIds.add(itemId);
+        }
+        break;
+      case ItemCollection.fridge:
+        if(selectedFridgeItemIds.contains(itemId)){
+          selectedFridgeItemIds.remove(itemId);
+        }else{
+          selectedFridgeItemIds.add(itemId);
+        }
+        break;
+    }
+    notifyListeners();
+  }
 
   @override
   void dispose(){
