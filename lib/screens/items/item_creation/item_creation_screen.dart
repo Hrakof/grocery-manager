@@ -44,20 +44,28 @@ class ItemCreationScreen extends StatelessWidget {
 class _ItemForm extends StatelessWidget {
   const _ItemForm({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
+
     return SingleChildScrollView(
       child: Column(
-        children: const [
-          _NameInput(),
-          SizedBox(height: 8.0),
-          _AmountInput(),
-          SizedBox(height: 8.0),
-          _UnitInput(),
-          SizedBox(height: 8.0),
-          _DescriptionInput(),
-          SizedBox(height: 8.0,),
-          _CreateButton(),
+        children: [
+          const _NameInput(),
+          const SizedBox(height: 8.0),
+          ExpansionTile(
+            title: Text(l10n.other),
+            children: const [
+              _AmountInput(),
+              SizedBox(height: 8.0),
+              _UnitInput(),
+              SizedBox(height: 8.0),
+              _DescriptionInput(),
+            ],
+          ),
+          const SizedBox(height: 8.0,),
+          const _CreateButton(),
         ],
       ),
     );

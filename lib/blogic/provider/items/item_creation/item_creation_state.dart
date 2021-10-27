@@ -73,10 +73,14 @@ class ItemCreationState with ChangeNotifier {
     }
     creationInProgress = true;
     notifyListeners();
+
+    final savedAmount = amount.value == null ? null : double.parse(amount.value!);
+
     final newItem = Item(
       id: const Uuid().v4(),
-      amount: double.parse(amount.value),
+      amount: savedAmount,
       name: name.value,
+      iconData: Icons.description,
       unit:  unit.value,
       description: description.value,
     );

@@ -135,7 +135,7 @@
             "description": "Can't be negative error text.",
             "context": "ItemCreationScreen"
         },
-    "unitLabel": "Unit (optional)",
+    "unitLabel": "Unit",
         "@unitLabel": {
             "description": "Unit label for textfield.",
             "context": "ItemCreationScreen"
@@ -145,7 +145,7 @@
             "description": "Too long error text.",
             "context": "ItemCreationScreen"
         },
-    "descriptionLabel": "Description (optional)",
+    "descriptionLabel": "Description",
         "@descriptionLabel": {
             "description": "Description label for textfield.",
             "context": "ItemCreationScreen"
@@ -158,6 +158,11 @@
     "createItemFailedMessage": "Failed to create item",
         "@createItemFailedMessage": {
             "description": "Message to be sent, when item creation fails.",
+            "context": "ItemCreationScreen"
+        },
+    "other": "Other",
+        "@other": {
+            "description": "Other.",
             "context": "ItemCreationScreen"
         }
 }

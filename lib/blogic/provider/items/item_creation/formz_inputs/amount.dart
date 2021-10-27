@@ -5,12 +5,15 @@ enum AmountValidationError {
   notANumber
 }
 
-class Amount extends FormzInput<String, AmountValidationError> {
-  const Amount.pure() : super.pure('');
-  const Amount.dirty({String value = ''}) : super.dirty(value);
+class Amount extends FormzInput<String?, AmountValidationError> {
+  const Amount.pure() : super.pure(null);
+  const Amount.dirty({String? value}) : super.dirty(value);
 
   @override
-  AmountValidationError? validator(String value) {
+  AmountValidationError? validator(String? value) {
+    if (value == null){
+      return null;
+    }
     double number = 0.0;
     try{
       number = double.parse(value);

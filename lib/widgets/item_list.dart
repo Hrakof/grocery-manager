@@ -22,8 +22,21 @@ class _ItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(_item.name),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(1.0),
+        border: Border.all(color: Colors.black)
+      ),
+      child: Row(
+        children: [
+          Checkbox(
+            value: false,
+            onChanged: (newValue){  } //TODO
+          ),
+          Icon(_item.iconData),
+          Text(_item.name)
+        ],
+      )
     );
   }
 }

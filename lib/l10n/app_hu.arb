@@ -29,9 +29,10 @@
     "amountLabel": "Mennyiség",
     "notANumber": "Nem szám",
     "cantBeNegative": "Nem lehet negatív",
-    "unitLabel": "Mértékegység (opcionális)",
+    "unitLabel": "Mértékegység",
     "tooLong": "Túl hosszú",
-    "descriptionLabel": "Leírás (opcionális)",
+    "descriptionLabel": "Leírás",
     "createItemButtonText": "Létrehoz",
-    "createItemFailedMessage": "Tétel létrehozása sikertelen"
+    "createItemFailedMessage": "Tétel létrehozása sikertelen",
+    "other": "Egyéb"
 }
