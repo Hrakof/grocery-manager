@@ -29,6 +29,26 @@ class Item extends Equatable{
     this.description,
   });
 
+  Item copyWith({
+    String? id,
+    String? name,
+    IconData? iconData,
+    DateTime? expirationDate,
+    double? amount,
+    String? unit,
+    String? description,
+  }){
+    return Item(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      iconData: iconData ?? this.iconData,
+      expirationDate: expirationDate ?? this.expirationDate,
+      amount: amount ?? this.amount,
+      unit: unit ?? this.unit,
+      description: description ?? this.description
+    );
+  }
+
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
   Map<String, dynamic> toJson() => _$ItemToJson(this);
 

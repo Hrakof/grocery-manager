@@ -3,6 +3,7 @@ import 'package:grocery_manager/blogic/provider/households/household_details_sta
 import 'package:grocery_manager/models/household/household.dart';
 import 'package:grocery_manager/repositories/item/item_repository.dart';
 import 'package:grocery_manager/screens/items/item_creation/item_creation_screen.dart';
+import 'package:grocery_manager/screens/items/item_details/item_details_screen.dart';
 import 'package:grocery_manager/widgets/item_list.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,16 @@ class CartTab extends StatelessWidget {
             state.cartItems!,
             checkedItemIds: state.selectedCartItemIds,
             onItemChecked: (item){
-              context.read<HouseholdDetailsState>().itemChecked(item.id, ItemCollection.cart);
+              state.itemChecked(item.id, ItemCollection.cart);
+            },
+            onItemTapped: (item){
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                return ItemDetailsScreen(
+                  householdId: state.household!.id,
+                  itemCollection: ItemCollection.cart,
+                  itemId: item.id,
+                );
+              }));
             },
           ),
         Selector<HouseholdDetailsState, Household?>(
