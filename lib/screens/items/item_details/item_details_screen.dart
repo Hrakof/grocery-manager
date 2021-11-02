@@ -59,33 +59,35 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Column(
-      children: [
-        Container(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: _IconRow(item.iconData)
+          ),
+          Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: _IconRow(item.iconData)
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: _NameRow(item.name)
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: _AmountRow(item.amount)
-        ),
-        Container(
+            child: _NameRow(item.name)
+          ),
+          Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: _UnitRow(item.unit)
-        ),
-        Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: _DescriptionRow(item.description)
-        ),
-        Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: _ExpirationDateRow(item.expirationDate)
-        ),
-      ],
+            child: _AmountRow(item.amount)
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: _UnitRow(item.unit)
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: _DescriptionRow(item.description)
+          ),
+          Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: _ExpirationDateRow(item.expirationDate)
+          ),
+        ],
+      ),
     );
   }
 }

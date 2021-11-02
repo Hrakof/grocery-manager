@@ -69,6 +69,7 @@ class _ItemTile extends StatelessWidget {
                 Text(_item.unit!),
               ],
               if(_item.expirationDate != null) ...[
+                const SizedBox(width: 10),
                 const Icon(Icons.calendar_today),
                 Text(_formatter.format(_item.expirationDate!)),
               ]
