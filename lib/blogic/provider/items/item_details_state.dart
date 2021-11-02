@@ -10,14 +10,12 @@ class ItemDetailsState with ChangeNotifier{
   String? errorMessage;
   final ItemRepository _itemRepository;
   final String _householdId;
-  final String _itemId;
   final ItemCollection _itemCollection;
   late StreamSubscription _itemSub;
 
   ItemDetailsState({required String householdId, required String itemId, required ItemCollection itemCollection, required ItemRepository itemRepository}):
     _itemRepository = itemRepository,
     _householdId = householdId,
-    _itemId = itemId,
     _itemCollection = itemCollection
   {
     _itemSub = _itemRepository.itemStream(householdId, itemCollection, itemId).listen((item) {
@@ -32,6 +30,51 @@ class ItemDetailsState with ChangeNotifier{
       return;
     }
     final newItem = oldItem.copyWith(name: newName);
+    await _itemRepository.updateItem(_householdId, _itemCollection, newItem);
+  }
+
+  Future<void> changeAmount(double newAmount) async{
+    final oldItem = item;
+    if(oldItem == null){
+      return;
+    }
+    final newItem = oldItem.copyWith(amount: newAmount);
+    await _itemRepository.updateItem(_householdId, _itemCollection, newItem);
+  }
+
+  Future<void> changeUnit(String newUnit) async{
+    final oldItem = item;
+    if(oldItem == null){
+      return;
+    }
+    final newItem = oldItem.copyWith(unit: newUnit);
+    await _itemRepository.updateItem(_householdId, _itemCollection, newItem);
+  }
+
+  Future<void> changeDescription(String newDescription) async{
+    final oldItem = item;
+    if(oldItem == null){
+      return;
+    }
+    final newItem = oldItem.copyWith(description: newDescription);
+    await _itemRepository.updateItem(_householdId, _itemCollection, newItem);
+  }
+
+  Future<void> changeIcon(IconData newIcon) async{
+    final oldItem = item;
+    if(oldItem == null){
+      return;
+    }
+    final newItem = oldItem.copyWith(iconData: newIcon);
+    await _itemRepository.updateItem(_householdId, _itemCollection, newItem);
+  }
+
+  Future<void> changeExpirationDate(DateTime newDate) async{
+    final oldItem = item;
+    if(oldItem == null){
+      return;
+    }
+    final newItem = oldItem.copyWith(expirationDate: newDate);
     await _itemRepository.updateItem(_householdId, _itemCollection, newItem);
   }
 

@@ -13,7 +13,7 @@ class Unit extends FormzInput<String?, UnitValidationError> {
     if (value == null) {
       return null;
     }
-    return value.length <= 10
+    return value.length <= 5
         ? null
         : UnitValidationError.tooLong;
   }

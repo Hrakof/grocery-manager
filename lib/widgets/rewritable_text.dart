@@ -8,8 +8,9 @@ class RewritableText extends StatefulWidget {
   final Text text;
   final String labelText;
   final Function(String) onTextEdited;
+  final TextInputType? textInputType;
 
-  const RewritableText({required this.text, required this.onTextEdited, required this.labelText, Key? key, }) : super(key: key);
+  const RewritableText({required this.text, required this.onTextEdited, required this.labelText, this.textInputType, Key? key, }) : super(key: key);
 
 
   @override
@@ -38,6 +39,7 @@ class _RewritableTextState extends State<RewritableText> {
             decoration: InputDecoration(
               labelText: widget.labelText,
             ),
+            keyboardType: widget.textInputType,
             onChanged: (text){
               newText = text;
             },
