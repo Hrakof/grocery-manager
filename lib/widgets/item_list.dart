@@ -3,35 +3,52 @@ import 'package:grocery_manager/models/item/item.dart';
 import 'package:intl/intl.dart';
 
 class ItemList extends StatelessWidget {
-  const ItemList(this._items, {Key? key, required this.onItemChecked, required this.checkedItemIds, required this.onItemTapped}) : super(key: key);
+  const ItemList(this._items, {Key? key, this.onItemChecked, required this.checkedItemIds, this.onItemTapped, this.listKey}) : super(key: key);
   final List<Item> _items;
   final List<String> checkedItemIds;
-  final Function(Item item) onItemChecked;
-  final Function(Item item) onItemTapped;
+  final Function(Item item)? onItemChecked;
+  final Function(Item item)? onItemTapped;
+  final GlobalKey<AnimatedListState>? listKey;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _items.length,
-      itemBuilder: (BuildContext context, int index) {
-        return _ItemTile(
-          _items[index],
-          isChecked: checkedItemIds.contains(_items[index].id),
-          onItemChecked: onItemChecked,
-          onItemTapped: onItemTapped,
-        );
-      },
-    );
+    if(listKey == null){
+      return ListView.builder(
+        itemCount: _items.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ItemTile(
+            _items[index],
+            isChecked: checkedItemIds.contains(_items[index].id),
+            onItemChecked: onItemChecked,
+            onItemTapped: onItemTapped,
+          );
+        },
+      );
+    } else {
+      return AnimatedList(
+        key: listKey,
+        initialItemCount: _items.length,
+        itemBuilder: (context, index, animation) {
+          return ItemTile(
+            _items[index],
+            isChecked: checkedItemIds.contains(_items[index].id),
+            onItemChecked: onItemChecked,
+            onItemTapped: onItemTapped,
+          );
+        },
+      );
+    }
+
   }
 }
 
-class _ItemTile extends StatelessWidget {
-  _ItemTile(this._item, {required this.onItemChecked, Key? key, required this.isChecked, required this.onItemTapped}) : super(key: key);
+class ItemTile extends StatelessWidget {
+  ItemTile(this._item, {this.onItemChecked, Key? key, required this.isChecked, this.onItemTapped}) : super(key: key);
   final Item _item;
   final bool isChecked;
   final DateFormat _formatter = DateFormat('MM-dd');
-  final Function(Item item) onItemChecked;
-  final Function(Item item) onItemTapped;
+  final Function(Item item)? onItemChecked;
+  final Function(Item item)? onItemTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +64,14 @@ class _ItemTile extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: (){
-            onItemTapped(_item);
+            onItemTapped?.call(_item);
           },
           child: Row(
             children: [
               Checkbox(
                 value: isChecked,
                 onChanged: (newValue){
-                  onItemChecked(_item);
+                  onItemChecked?.call(_item);
                 }
               ),
               Icon(_item.iconData),

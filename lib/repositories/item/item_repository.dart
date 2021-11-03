@@ -32,6 +32,42 @@ class ItemRepository{
     );
   }
 
+  Future<void> moveItems(String householdId, ItemCollection fromItemCollection, ItemCollection toItemCollection, List<Item> items) async {
+
+    final List<DocumentReference> fromDocs = [];
+    final List<DocumentReference> toDocs = [];
+
+    final householdDoc =  FirebaseFirestore.instance.collection('households').doc(householdId);
+
+    for(final item in items){
+      fromDocs.add(householdDoc.collection(fromItemCollection.getCollectionName()).doc(item.id));
+      toDocs.add(householdDoc.collection(toItemCollection.getCollectionName()).doc(item.id));
+    }
+
+    await FirebaseFirestore.instance.runTransaction((transaction) async {
+      for(final docRef in fromDocs){
+        transaction.delete(docRef);
+      }
+      toDocs.asMap().forEach((index, docRef) {
+        transaction.set(docRef, items[index].toJson());
+      });
+    });
+  }
+
+  Future<void> deleteItems(String householdId, ItemCollection itemCollection, List<Item> items) async {
+    final List<DocumentReference> docRefs = [];
+
+    for(final item in items){
+      docRefs.add(_getCollectionReference(householdId, itemCollection).doc(item.id));
+    }
+
+    await FirebaseFirestore.instance.runTransaction((transaction) async {
+      for(final docRef in docRefs){
+        transaction.delete(docRef);
+      }
+    });
+  }
+
   Future<void> updateItem(String householdId, ItemCollection itemCollection, Item item) async {
     await FirebaseFirestore.instance.runTransaction((transaction) async {
       final docRef = _getCollectionReference(householdId, itemCollection).doc(item.id);

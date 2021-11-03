@@ -34,5 +34,10 @@
     "descriptionLabel": "Leírás",
     "createItemButtonText": "Létrehoz",
     "createItemFailedMessage": "Tétel létrehozása sikertelen",
-    "other": "Egyéb"
+    "other": "Egyéb",
+    "confirmDeleteItemsTitle": "Törlés",
+    "confirmDeleteItemsMessage": "Biztos törölni szeretnéd ezeket a tételeket?",
+    "yes": "Igen",
+    "no": "Nem"
+
 }

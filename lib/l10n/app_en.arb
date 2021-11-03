@@ -164,5 +164,21 @@
         "@other": {
             "description": "Other.",
             "context": "ItemCreationScreen"
+        },
+    "confirmDeleteItemsTitle": "Confirm delete",
+        "@confirmDeleteItemsTitle": {
+            "description": "Confirm delete items title."
+        },
+    "confirmDeleteItemsMessage": "Are you sure you want to delete these items?",
+        "@confirmDeleteItemsMessage": {
+            "description": "Confirm delete items message."
+        },
+    "yes": "Yes",
+        "@yes": {
+            "description": "Yes."
+        },
+    "no": "No",
+        "@no": {
+            "description": "No."
         }
 }
