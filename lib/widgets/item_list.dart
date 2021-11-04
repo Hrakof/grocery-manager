@@ -1,44 +1,43 @@
+import 'package:diffutil_sliverlist/diffutil_sliverlist.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_manager/models/item/item.dart';
 import 'package:intl/intl.dart';
 
 class ItemList extends StatelessWidget {
-  const ItemList(this._items, {Key? key, this.onItemChecked, required this.checkedItemIds, this.onItemTapped, this.listKey}) : super(key: key);
+  const ItemList(this._items, {Key? key, this.onItemChecked, required this.checkedItemIds, this.onItemTapped}) : super(key: key);
   final List<Item> _items;
   final List<String> checkedItemIds;
   final Function(Item item)? onItemChecked;
   final Function(Item item)? onItemTapped;
-  final GlobalKey<AnimatedListState>? listKey;
 
   @override
   Widget build(BuildContext context) {
-    if(listKey == null){
-      return ListView.builder(
-        itemCount: _items.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ItemTile(
-            _items[index],
-            isChecked: checkedItemIds.contains(_items[index].id),
-            onItemChecked: onItemChecked,
-            onItemTapped: onItemTapped,
-          );
-        },
-      );
-    } else {
-      return AnimatedList(
-        key: listKey,
-        initialItemCount: _items.length,
-        itemBuilder: (context, index, animation) {
-          return ItemTile(
-            _items[index],
-            isChecked: checkedItemIds.contains(_items[index].id),
-            onItemChecked: onItemChecked,
-            onItemTapped: onItemTapped,
-          );
-        },
-      );
-    }
-
+    return CustomScrollView(
+      slivers: [
+        DiffUtilSliverList<Item>(
+          items: _items,
+          builder: (context, item) =>
+              ItemTile(
+                item,
+                isChecked: checkedItemIds.contains(item.id),
+                onItemChecked: onItemChecked,
+                onItemTapped: onItemTapped,
+              ),
+          insertAnimationBuilder: (context, animation, child) =>
+            SizeTransition(
+              sizeFactor: animation,
+              child: child,
+            ),
+          removeAnimationBuilder: (context, animation, child) =>
+            SizeTransition(
+              sizeFactor: animation,
+              child: child,
+            ),
+          removeAnimationDuration: const Duration(milliseconds: 1000),
+          insertAnimationDuration: const Duration(milliseconds: 1000),
+        ),
+      ],
+    );
   }
 }
 

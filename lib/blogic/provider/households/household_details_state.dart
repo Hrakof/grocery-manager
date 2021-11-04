@@ -6,7 +6,6 @@ import 'package:grocery_manager/models/household/household.dart';
 import 'package:grocery_manager/models/item/item.dart';
 import 'package:grocery_manager/repositories/household/household_repository.dart';
 import 'package:grocery_manager/repositories/item/item_repository.dart';
-import 'package:grocery_manager/widgets/item_list.dart';
 
 class HouseholdDetailsState with ChangeNotifier {
 
@@ -17,12 +16,10 @@ class HouseholdDetailsState with ChangeNotifier {
   Household? household;
 
   List<Item>? cartItems;
-  late GlobalKey<AnimatedListState> cartItemsListKey;
-  final List<String> selectedCartItemIds = [];
+  List<String> selectedCartItemIds = [];
 
   List<Item>? fridgeItems;
-  late GlobalKey<AnimatedListState> fridgeItemsListKey;
-  final List<String> selectedFridgeItemIds= [];
+  List<String> selectedFridgeItemIds= [];
 
   final List<StreamSubscription> _streamSubs = [];
 
@@ -37,12 +34,12 @@ class HouseholdDetailsState with ChangeNotifier {
     }));
     _streamSubs.add(_itemRepository.itemListStream(householdId, ItemCollection.cart).listen((newItems) {
       cartItems = newItems;
-      cartItemsListKey = GlobalKey();
+      filterSelectedCartItemIds();
       notifyListeners();
     }));
     _streamSubs.add(_itemRepository.itemListStream(householdId, ItemCollection.fridge).listen((newItems) {
       fridgeItems = newItems;
-      fridgeItemsListKey = GlobalKey();
+      filterSelectedFridgeItemIds();
       notifyListeners();
     }));
   }
@@ -72,36 +69,12 @@ class HouseholdDetailsState with ChangeNotifier {
 
     final List<Item> movedItems = [];
     for(final itemId in selectedCartItemIds){
-      final idx = getIndexOfItemById(cartItems!, itemId);
-      if(idx == null) continue;
-
-      final item = cartItems!.removeAt(idx);
+      final item = getItemById(cartItems!, itemId);
+      if(item == null) continue;
       movedItems.add(item);
-      cartItemsListKey.currentState?.removeItem(
-        idx,
-        (_, animation){
-          return SlideTransition(
-            position: animation.drive(Tween(begin: const Offset(1, 0), end: Offset.zero)),
-            child: ItemTile(item, isChecked: true),
-          );
-        },
-        duration: const Duration(milliseconds: 700)
-      );
     }
 
-    final List<String> savedCartItemIds = List.from(selectedCartItemIds);
-    selectedCartItemIds.clear();
-    notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 750)); //wait for animation
-
-    try{
-      await _itemRepository.moveItems(_householdId, ItemCollection.cart, ItemCollection.fridge, movedItems);
-    } on Exception {
-      print('--- failed to move cart items');
-      cartItems!.addAll(movedItems);
-      selectedCartItemIds.addAll(savedCartItemIds);
-      notifyListeners();
-    }
+    await _itemRepository.moveItems(_householdId, ItemCollection.cart, ItemCollection.fridge, movedItems);
   }
 
   Future<void> moveSelectedFridgeItemsToCart() async {
@@ -109,46 +82,22 @@ class HouseholdDetailsState with ChangeNotifier {
 
     final List<Item> movedItems = [];
     for(final itemId in selectedFridgeItemIds){
-      final idx = getIndexOfItemById(fridgeItems!, itemId);
-      if(idx == null) continue;
-
-      final item = fridgeItems!.removeAt(idx);
+      final item = getItemById(fridgeItems!, itemId);
+      if(item == null) continue;
       movedItems.add(item);
-      fridgeItemsListKey.currentState?.removeItem(
-          idx,
-          (_, animation){
-            return SlideTransition(
-              position: animation.drive(Tween(begin: const Offset(-1, 0), end: Offset.zero)),
-              child: ItemTile(item, isChecked: true),
-            );
-          },
-          duration: const Duration(milliseconds: 700)
-      );
     }
 
-    final List<String> savedFridgeItemIds = List.from(selectedFridgeItemIds);
-    selectedFridgeItemIds.clear();
-    notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 750)); //wait for animation
-
-    try{
-      await _itemRepository.moveItems(_householdId, ItemCollection.fridge, ItemCollection.cart, movedItems);
-    } on Exception {
-      print('--- failed to move fridge items');
-      fridgeItems!.addAll(movedItems);
-      selectedFridgeItemIds.addAll(savedFridgeItemIds);
-      notifyListeners();
-    }
+    await _itemRepository.moveItems(_householdId, ItemCollection.fridge, ItemCollection.cart, movedItems);
   }
 
-  int? getIndexOfItemById(List<Item> items, String id){
-    int? idx;
-    items.asMap().forEach((index, item){
+  Item? getItemById(List<Item> items, String id){
+    Item? result;
+    for (final item in items) {
       if(item.id == id){
-        idx = index;
+        result = item;
       }
-    });
-    return idx;
+    }
+    return result;
   }
 
   Future<void> removeSelectedCartItems() async{
@@ -156,36 +105,12 @@ class HouseholdDetailsState with ChangeNotifier {
 
     final List<Item> removedItems = [];
     for(final itemId in selectedCartItemIds){
-      final idx = getIndexOfItemById(cartItems!, itemId);
-      if(idx == null) continue;
-
-      final item = cartItems!.removeAt(idx);
+      final item = getItemById(cartItems!, itemId);
+      if(item == null) continue;
       removedItems.add(item);
-      cartItemsListKey.currentState?.removeItem(
-          idx,
-          (_, animation){
-            return SizeTransition(
-              sizeFactor: animation,
-              child: ItemTile(item, isChecked: true),
-            );
-          },
-          duration: const Duration(milliseconds: 700)
-      );
     }
 
-    final List<String> savedCartItemIds = List.from(selectedCartItemIds);
-    selectedCartItemIds.clear();
-    notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 750)); //wait for animation
-
-    try{
-      await _itemRepository.deleteItems(_householdId, ItemCollection.cart, removedItems);
-    } on Exception {
-      print('--- failed to remove cart items');
-      cartItems!.addAll(removedItems);
-      selectedCartItemIds.addAll(savedCartItemIds);
-      notifyListeners();
-    }
+    await _itemRepository.deleteItems(_householdId, ItemCollection.cart, removedItems);
   }
 
   Future<void> removeSelectedFridgeItems() async {
@@ -193,37 +118,24 @@ class HouseholdDetailsState with ChangeNotifier {
 
     final List<Item> removedItems = [];
     for(final itemId in selectedFridgeItemIds){
-      final idx = getIndexOfItemById(fridgeItems!, itemId);
-      if(idx == null) continue;
-
-      final item = fridgeItems!.removeAt(idx);
+      final item = getItemById(fridgeItems!, itemId);
+      if(item == null) continue;
       removedItems.add(item);
-      fridgeItemsListKey.currentState?.removeItem(
-          idx,
-          (_, animation){
-            return SizeTransition(
-              sizeFactor: animation,
-              child: ItemTile(item, isChecked: true),
-            );
-          },
-          duration: const Duration(milliseconds: 700)
-      );
     }
 
-    final List<String> savedFridgeItemIds = List.from(selectedFridgeItemIds);
-    selectedFridgeItemIds.clear();
-    notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 750)); //wait for animation
-
-    try{
-      await _itemRepository.deleteItems(_householdId, ItemCollection.fridge, removedItems);
-    } on Exception {
-      print('--- failed to remove fridge items');
-      fridgeItems!.addAll(removedItems);
-      selectedFridgeItemIds.addAll(savedFridgeItemIds);
-      notifyListeners();
-    }
+    await _itemRepository.deleteItems(_householdId, ItemCollection.fridge, removedItems);
   }
+
+  void filterSelectedCartItemIds(){
+    if (cartItems == null) return;
+    selectedCartItemIds = selectedCartItemIds.where((id) => getItemById(cartItems!, id) != null).toList();
+  }
+
+  void filterSelectedFridgeItemIds(){
+    if (fridgeItems == null) return;
+    selectedFridgeItemIds = selectedFridgeItemIds.where((id) => getItemById(fridgeItems!, id) != null).toList();
+  }
+
 
   @override
   void dispose(){

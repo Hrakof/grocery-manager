@@ -22,7 +22,6 @@ class CartTab extends StatelessWidget {
             :
           ItemList(
             state.cartItems!,
-            listKey: state.cartItemsListKey,
             checkedItemIds: state.selectedCartItemIds,
             onItemChecked: (item){
               state.itemChecked(item.id, ItemCollection.cart);

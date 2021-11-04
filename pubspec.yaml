@@ -25,6 +25,7 @@ dependencies:
   uuid: ^3.0.5
   flutter_iconpicker: ^3.0.4
   font_awesome_flutter: 9.1.0 # in 9.2.0 a getter is removed that flutter_iconpicker needs
+  diffutil_sliverlist: ^0.5.1
 
   #bloc
   bloc: ^7.2.1

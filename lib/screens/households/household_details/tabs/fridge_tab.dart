@@ -22,7 +22,6 @@ class FridgeTab extends StatelessWidget {
             :
         ItemList(
           state.fridgeItems!,
-          listKey: state.fridgeItemsListKey,
           checkedItemIds: state.selectedFridgeItemIds,
           onItemChecked: (item){
             state.itemChecked(item.id, ItemCollection.fridge);

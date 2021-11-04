@@ -53,7 +53,7 @@ class Item extends Equatable{
   Map<String, dynamic> toJson() => _$ItemToJson(this);
 
   @override
-  List<Object?> get props => [id, name, amount, iconData, unit, description];
+  List<Object?> get props => [id, name, amount, iconData, unit, description, expirationDate];
 
   static Map<String, dynamic>? _iconDataToJson(IconData iconData){
     return serializeIcon(iconData);

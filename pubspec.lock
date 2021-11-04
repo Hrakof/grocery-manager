@@ -197,6 +197,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
+  diffutil_dart:
+    dependency: transitive
+    description:
+      name: diffutil_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
+  diffutil_sliverlist:
+    dependency: "direct main"
+    description:
+      name: diffutil_sliverlist
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.1"
   double_back_to_close_app:
     dependency: "direct main"
     description:
