@@ -11,7 +11,7 @@ class InviteCode with _$InviteCode {
     String code,
     @JsonKey(name: 'household_id')
     String householdId,
-    @JsonKey(name: 'expiration_date', toJson: InviteCode._dateTimeToTimestamp, fromJson: InviteCode._timestampToDateTime)
+    @JsonKey(name: 'creation_date', toJson: InviteCode._dateTimeToTimestamp, fromJson: InviteCode._timestampToDateTime)
     DateTime creationDate
   ) = _InviteCode;
 
