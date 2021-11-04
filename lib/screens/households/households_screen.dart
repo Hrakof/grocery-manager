@@ -5,6 +5,7 @@ import 'package:grocery_manager/blogic/bloc/app/app_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_manager/blogic/provider/households/households_state.dart';
 import 'package:grocery_manager/repositories/household/household_repository.dart';
+import 'package:grocery_manager/repositories/invite_code/invite_code_repository.dart';
 import 'package:grocery_manager/widgets/options_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,11 @@ class HouseholdsScreen extends StatelessWidget {
     final user = (context.read<AppBloc>().state as AuthenticatedAppState).currentUser;
 
     return ChangeNotifierProvider(
-      create: (BuildContext context) => HouseholdsState(householdRepository: context.read<HouseholdRepository>(), currentUser: user),
+      create: (BuildContext context) => HouseholdsState(
+          householdRepository: context.read<HouseholdRepository>(),
+          inviteCodeRepository: context.read<InviteCodeRepository>(),
+          currentUser: user
+      ),
       builder: (context, _){
         return Scaffold(
           appBar: AppBar(

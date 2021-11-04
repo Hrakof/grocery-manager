@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider.value(value: _userRepo),
         RepositoryProvider(create: (_) => HouseholdRepository()),
         RepositoryProvider(create: (_) => ItemRepository()),
+        RepositoryProvider(create: (_) => InviteCodeRepository()),
       ],
       child: BlocProvider(
         create: (_) => AppBloc(authenticationRepository: _authRepo, userRepository: _userRepo),

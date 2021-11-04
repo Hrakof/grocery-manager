@@ -6,14 +6,13 @@ part 'invite_code.g.dart';
 
 @freezed
 class InviteCode with _$InviteCode {
-  factory InviteCode(
-    String id,
-    String code,
+  factory InviteCode({
+    required String value,
     @JsonKey(name: 'household_id')
-    String householdId,
+    required String householdId,
     @JsonKey(name: 'creation_date', toJson: InviteCode._dateTimeToTimestamp, fromJson: InviteCode._timestampToDateTime)
-    DateTime creationDate
-  ) = _InviteCode;
+    required DateTime creationDate
+  }) = _InviteCode;
 
   factory InviteCode.fromJson(Map<String, dynamic> json) => _$InviteCodeFromJson(json);
 
