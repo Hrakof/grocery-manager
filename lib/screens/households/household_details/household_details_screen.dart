@@ -4,7 +4,7 @@ import 'package:grocery_manager/repositories/household/household_repository.dart
 import 'package:grocery_manager/repositories/item/item_repository.dart';
 import 'package:grocery_manager/screens/households/household_details/tabs/cart_tab.dart';
 import 'package:grocery_manager/screens/households/household_details/tabs/fridge_tab.dart';
-import 'package:grocery_manager/screens/households/household_details/tabs/members_tab.dart';
+import 'package:grocery_manager/screens/households/household_details/tabs/manage_tab.dart';
 import 'package:grocery_manager/widgets/options_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -43,7 +43,7 @@ class HouseholdDetailsScreen extends StatelessWidget {
               tabs: [
                 Tab(text: l10n.cartTabTitle),
                 Tab(text: l10n.fridgeTabTitle),
-                Tab(text: l10n.membersTabTitle),
+                Tab(text: l10n.manageTabTitle),
               ],
             ),
           ),
@@ -52,7 +52,7 @@ class HouseholdDetailsScreen extends StatelessWidget {
             children: [
               CartTab(),
               FridgeTab(),
-              MembersTab(),
+              ManageTab(),
             ],
           ),
         ),

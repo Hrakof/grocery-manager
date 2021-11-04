@@ -96,9 +96,9 @@
             "description": "Fridge tab title.",
             "context": "HouseholdDetailsScreen"
         },
-    "membersTabTitle": "Members",
-        "@membersTabTitle": {
-            "description": "Members tab title.",
+    "manageTabTitle": "Manage",
+        "@manageTabTitle": {
+            "description": "Manage tab title.",
             "context": "HouseholdDetailsScreen"
         },
     "unknownHouseholdName": "Unknown",
