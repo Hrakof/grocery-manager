@@ -38,6 +38,13 @@
     "confirmDeleteItemsTitle": "Törlés",
     "confirmDeleteItemsMessage": "Biztos törölni szeretnéd ezeket a tételeket?",
     "yes": "Igen",
-    "no": "Nem"
-
+    "no": "Nem",
+    "inviteCode": "Meghívó kód",
+    "delete": "Törlés",
+    "leave": "Kilépés",
+    "kick": "Kirúgás",
+    "members": "Tagok",
+    "confirmDeleteHouseholdMessage": "Biztos törölni szeretnéd ezt a háztartást?",
+    "confirmLeaveHouseholdMessage": "Biztos ki akarsz lépni ebből a háztartásból?",
+    "confirmKickMessage": "Biztos ki szeretnéd rúgni ezt a tagot?"
 }

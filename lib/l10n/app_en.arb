@@ -67,7 +67,6 @@
         "@createHouseHoldDialogTitle": {
             "description": "Household creation dialog title.",
             "context": "HouseholdScreen"
-
         },
     "nameLabel": "Name",
         "@nameLabel": {
@@ -180,5 +179,45 @@
     "no": "No",
         "@no": {
             "description": "No."
+        },
+    "inviteCode": "Invite code",
+        "@inviteCode": {
+            "description": "Invite code.",
+            "context": "HouseholdDetailsScreen"
+        },
+    "delete": "Delete",
+        "@delete": {
+            "description": "Delete.",
+            "context": "HouseholdDetailsScreen"
+        },
+    "leave": "Leave",
+        "@leave": {
+            "description": "Leave.",
+            "context": "HouseholdDetailsScreen"
+        },
+    "kick": "Kick",
+        "@kick": {
+            "description": "Kick.",
+            "context": "HouseholdDetailsScreen"
+        },
+    "members": "Members",
+        "@members": {
+            "description": "Members.",
+            "context": "HouseholdDetailsScreen"
+        },
+    "confirmDeleteHouseholdMessage": "Are you sure you want to delete this household?",
+        "@confirmDeleteMessage": {
+            "description": "Confirm delete message.",
+            "context": "HouseholdDetailsScreen"
+        },
+    "confirmLeaveHouseholdMessage": "Are you sure you want to leave this household?",
+        "@confirmLeaveMessage": {
+            "description": "Confirm leave message..",
+            "context": "HouseholdDetailsScreen"
+        },
+    "confirmKickMessage": "Are you sure you want to kick this member?",
+        "@confirmKickMessage": {
+            "description": "Confirm kick message..",
+            "context": "HouseholdDetailsScreen"
         }
 }

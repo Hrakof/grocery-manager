@@ -23,8 +23,8 @@ class UserRepository {
     await userDoc.set(user);
   }
 
-  Future<User> getUser(String uid) async {
+  Future<User?> getUser(String uid) async {
     final snapshot = await _userCollection.doc(uid).get();
-    return snapshot.data()!;
+    return snapshot.data();
   }
 }

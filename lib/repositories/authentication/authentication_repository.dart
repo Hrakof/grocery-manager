@@ -50,7 +50,6 @@ class AuthenticationRepository {
           id: credential.user!.uid,
           email: email,
           displayName: displayName,
-          householdIds: const [],
       ));
     } on firebase.FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

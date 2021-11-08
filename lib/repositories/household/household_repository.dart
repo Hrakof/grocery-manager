@@ -12,16 +12,21 @@ class HouseholdRepository {
     toFirestore: (household, _) => household.toJson(),
   );
 
-  Stream<Household> householdStream(String id) {
+  Stream<Household?> householdStream(String id) {
     return _householdCollection
         .doc(id)
         .snapshots()
-        .map( (snapshot) =>snapshot.data()! );
+        .map( (snapshot) => snapshot.data() );
   }
 
   Future<void> updateHousehold(Household household) async {
     final docRef = _householdCollection.doc(household.id);
     await docRef.set(household);
+  }
+
+  Future<void> deleteHousehold(String householdId) async {
+    final docRef = _householdCollection.doc(householdId);
+    await docRef.delete();
   }
 
   Future<Household> getHousehold(String uid) async {

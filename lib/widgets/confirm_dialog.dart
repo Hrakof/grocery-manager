@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
-
-Future<bool> showConfirmDeleteItemsDialog(BuildContext context) async {
+Future<bool> showConfirmDialog(BuildContext context, {required final String title, required final String message}) async {
   final l10n = L10n.of(context)!;
   final result = await showDialog<bool>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(l10n.confirmDeleteItemsTitle),
-        content: Text(l10n.confirmDeleteItemsMessage),
+        title: Text(title),
+        content: Text(message),
         actions: [
           ElevatedButton(
               onPressed: (){ Navigator.pop(context,true ); },
