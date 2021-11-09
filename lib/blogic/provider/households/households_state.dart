@@ -28,6 +28,16 @@ class HouseholdsState with ChangeNotifier {
     });
   }
 
+  Future<void> joinHousehold(String inviteCodeValue) async {
+    final inviteCode = await _inviteCodeRepo.getInviteCodeByValue(inviteCodeValue);
+    if(inviteCode == null) throw InvalidInviteCodeException(inviteCodeValue);
+    final household = await _householdRepo.getHousehold(inviteCode.householdId);
+    if(household == null) throw const HouseholdDoesNotExistException();
+    if(household.memberUids.contains(currentUser.id)) throw const AlreadyMemberException();
+    household.memberUids.add(currentUser.id);
+    await _householdRepo.updateHousehold(household);
+  }
+
   Future<void> createHousehold(String name) async {
     final household = Household(
       id: const Uuid().v4(),
@@ -62,4 +72,18 @@ class HouseholdsState with ChangeNotifier {
     _streamSub.cancel();
     super.dispose();
   }
+}
+
+class InvalidInviteCodeException implements Exception {
+  final String inviteCode;
+
+  const InvalidInviteCodeException(this.inviteCode);
+}
+
+class HouseholdDoesNotExistException implements Exception {
+  const HouseholdDoesNotExistException();
+}
+
+class AlreadyMemberException implements Exception {
+  const AlreadyMemberException();
 }

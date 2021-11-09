@@ -57,7 +57,7 @@ class ItemTile extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         border: Border.all(color: Colors.black),
-        color: Colors.white38,
+        color: Colors.amber[100],
       ),
       child: Material(
         color: Colors.transparent,

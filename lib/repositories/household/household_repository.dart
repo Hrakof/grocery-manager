@@ -29,9 +29,9 @@ class HouseholdRepository {
     await docRef.delete();
   }
 
-  Future<Household> getHousehold(String uid) async {
-    final snapshot = await _householdCollection.doc(uid).get();
-    return snapshot.data()!;
+  Future<Household?> getHousehold(String id) async {
+    final snapshot = await _householdCollection.doc(id).get();
+    return snapshot.data();
   }
 
   Stream<List<Household>> getHouseholdsStreamForUser(User user) {

@@ -212,12 +212,42 @@
         },
     "confirmLeaveHouseholdMessage": "Are you sure you want to leave this household?",
         "@confirmLeaveMessage": {
-            "description": "Confirm leave message..",
+            "description": "Confirm leave message.",
             "context": "HouseholdDetailsScreen"
         },
     "confirmKickMessage": "Are you sure you want to kick this member?",
         "@confirmKickMessage": {
-            "description": "Confirm kick message..",
+            "description": "Confirm kick message.",
             "context": "HouseholdDetailsScreen"
+        },
+    "create": "Create",
+        "@create": {
+            "description": "Create.",
+            "context": "HouseholdsScreen"
+        },
+    "join": "Join",
+        "@join": {
+            "description": "Join.",
+            "context": "HouseholdsScreen"
+        },
+    "joinHouseHoldDialogTitle": "Join household",
+        "@joinHouseHoldDialogTitle": {
+            "description": "Join household.",
+            "context": "HouseholdsScreen"
+        },
+    "invalidInviteCode": "Invalid invite code",
+        "@invalidInviteCode": {
+            "description": "Invalid invite code.",
+            "context": "HouseholdsScreen"
+        },
+    "houseHoldDoesNotExist": "Household doesn't exist",
+        "@houseHoldDoesNotExist": {
+            "description": "Household doesn't exist.",
+            "context": "HouseholdsScreen"
+        },
+    "alreadyMember": "You are already a member",
+        "@alreadyMember": {
+            "description": "You are already a member of this household.",
+            "context": "HouseholdsScreen"
         }
 }

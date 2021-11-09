@@ -1,6 +1,6 @@
 {
     "@@locale": "hu",
-    "loginTitle": "Bejelentkezés cím",
+    "loginTitle": "Bejelentkezés",
     "homeTitle": "Főoldal cím",
     "signUpTitle": "Regisztráció",
     "tapBackAgainToLeave": "Kilépéshez nyomd meg újra!",
@@ -46,5 +46,11 @@
     "members": "Tagok",
     "confirmDeleteHouseholdMessage": "Biztos törölni szeretnéd ezt a háztartást?",
     "confirmLeaveHouseholdMessage": "Biztos ki akarsz lépni ebből a háztartásból?",
-    "confirmKickMessage": "Biztos ki szeretnéd rúgni ezt a tagot?"
+    "confirmKickMessage": "Biztos ki szeretnéd rúgni ezt a tagot?",
+    "create": "Létrehozás",
+    "join": "Belépés",
+    "joinHouseHoldDialogTitle": "Belépés a háztartásba",
+    "invalidInviteCode": "Érvénytelen meghívó kód",
+    "houseHoldDoesNotExist": "Háztartás nem létezik",
+    "alreadyMember": "Már tagja vagy"
 }
