@@ -45,20 +45,25 @@ class HouseholdsState with ChangeNotifier {
       ownerUid: currentUser.id,
       memberUids: [ currentUser.id ],
     );
-    await _householdRepo.updateHousehold(household);
-    await _createInviteCode(household.id);
+    final codeCreated = await _createInviteCode(household.id);
+    if(codeCreated){
+      await _householdRepo.updateHousehold(household);
+    }
   }
 
-  Future<void> _createInviteCode(String householdId) async {
-    bool done = false;
-    while(!done){
+  Future<bool> _createInviteCode(String householdId) async {
+    int tries = 0;
+    while(tries < 5){
+      tries++;
       final newInviteCode = InviteCode(
         value: getRandomString(6),
         householdId: householdId,
         creationDate: DateTime.now(),
       );
-      done = await _inviteCodeRepo.createInviteCode(newInviteCode);
+      final success = await _inviteCodeRepo.createInviteCode(newInviteCode);
+      if(success) return true;
     }
+    return false;
   }
 
   static const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
