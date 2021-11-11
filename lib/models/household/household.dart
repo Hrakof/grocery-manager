@@ -26,4 +26,18 @@ class Household extends Equatable{
   @override
   List<Object?> get props => [id, name, ownerUid, memberUids];
 
+  Household copyWith({
+    String? id,
+    String? name,
+    String? ownerUid,
+    List<String>? memberUids,
+  }){
+    return Household(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      ownerUid: ownerUid ?? this.ownerUid,
+      memberUids: memberUids ?? this.memberUids
+    );
+  }
+
 }

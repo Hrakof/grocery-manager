@@ -27,7 +27,7 @@ class HouseholdDetailsState with ChangeNotifier {
   List<User> members = [];
 
   String inviteCode = "";
-  bool householdDeleted = false;//TODO kell?
+  bool householdDeleted = false;
 
   final List<StreamSubscription> _streamSubs = [];
 
@@ -51,12 +51,12 @@ class HouseholdDetailsState with ChangeNotifier {
     }));
     _streamSubs.add(_itemRepository.itemListStream(householdId, ItemCollection.cart).listen((newItems) {
       cartItems = newItems;
-      filterSelectedCartItemIds();
+      _filterSelectedCartItemIds();
       notifyListeners();
     }));
     _streamSubs.add(_itemRepository.itemListStream(householdId, ItemCollection.fridge).listen((newItems) {
       fridgeItems = newItems;
-      filterSelectedFridgeItemIds();
+      _filterSelectedFridgeItemIds();
       notifyListeners();
     }));
   }
@@ -86,7 +86,7 @@ class HouseholdDetailsState with ChangeNotifier {
 
     final List<Item> movedItems = [];
     for(final itemId in selectedCartItemIds){
-      final item = getItemById(cartItems!, itemId);
+      final item = _getItemById(cartItems!, itemId);
       if(item == null) continue;
       movedItems.add(item);
     }
@@ -99,7 +99,7 @@ class HouseholdDetailsState with ChangeNotifier {
 
     final List<Item> movedItems = [];
     for(final itemId in selectedFridgeItemIds){
-      final item = getItemById(fridgeItems!, itemId);
+      final item = _getItemById(fridgeItems!, itemId);
       if(item == null) continue;
       movedItems.add(item);
     }
@@ -107,7 +107,7 @@ class HouseholdDetailsState with ChangeNotifier {
     await _itemRepository.moveItems(_householdId, ItemCollection.fridge, ItemCollection.cart, movedItems);
   }
 
-  Item? getItemById(List<Item> items, String id){
+  Item? _getItemById(List<Item> items, String id){
     Item? result;
     for (final item in items) {
       if(item.id == id){
@@ -122,7 +122,7 @@ class HouseholdDetailsState with ChangeNotifier {
 
     final List<Item> removedItems = [];
     for(final itemId in selectedCartItemIds){
-      final item = getItemById(cartItems!, itemId);
+      final item = _getItemById(cartItems!, itemId);
       if(item == null) continue;
       removedItems.add(item);
     }
@@ -135,7 +135,7 @@ class HouseholdDetailsState with ChangeNotifier {
 
     final List<Item> removedItems = [];
     for(final itemId in selectedFridgeItemIds){
-      final item = getItemById(fridgeItems!, itemId);
+      final item = _getItemById(fridgeItems!, itemId);
       if(item == null) continue;
       removedItems.add(item);
     }
@@ -143,14 +143,14 @@ class HouseholdDetailsState with ChangeNotifier {
     await _itemRepository.deleteItems(_householdId, ItemCollection.fridge, removedItems);
   }
 
-  void filterSelectedCartItemIds(){
+  void _filterSelectedCartItemIds(){
     if (cartItems == null) return;
-    selectedCartItemIds = selectedCartItemIds.where((id) => getItemById(cartItems!, id) != null).toList();
+    selectedCartItemIds = selectedCartItemIds.where((id) => _getItemById(cartItems!, id) != null).toList();
   }
 
-  void filterSelectedFridgeItemIds(){
+  void _filterSelectedFridgeItemIds(){
     if (fridgeItems == null) return;
-    selectedFridgeItemIds = selectedFridgeItemIds.where((id) => getItemById(fridgeItems!, id) != null).toList();
+    selectedFridgeItemIds = selectedFridgeItemIds.where((id) => _getItemById(fridgeItems!, id) != null).toList();
   }
 
   Future<void> _updateMemberNames(Household? oldHousehold, Household newHousehold) async {
@@ -176,8 +176,8 @@ class HouseholdDetailsState with ChangeNotifier {
 
   Future<void> leaveHousehold(String uid) async {
     if(household == null || household!.ownerUid == uid || !household!.memberUids.contains(uid)) return;
-    final newHousehold = household!;
-    newHousehold.memberUids.remove(uid);
+    final newMemberList = household!.memberUids.where((memberId) => memberId != uid).toList();
+    final newHousehold = household!.copyWith(memberUids: newMemberList);
     await _householdRepo.updateHousehold(newHousehold);
   }
 
@@ -188,8 +188,8 @@ class HouseholdDetailsState with ChangeNotifier {
 
   Future<void> kickMember(String uid) async {
     if(household == null || !household!.memberUids.contains(uid)) return;
-    final newHousehold = household!;
-    newHousehold.memberUids.remove(uid);
+    final newMemberList = household!.memberUids.where((memberId) => memberId != uid).toList();
+    final newHousehold = household!.copyWith(memberUids: newMemberList);
     await _householdRepo.updateHousehold(newHousehold);
   }
 

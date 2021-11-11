@@ -21,13 +21,20 @@ void main() {
     final inviteCodeRepo = MockInviteCodeRepository();
     final householdRepo = MockHouseholdRepository();
 
-    setUpAll((){
+    late HouseholdsState householdsState;
+
+    setUp((){
       reset(householdRepo);
       reset(inviteCodeRepo);
       when(householdRepo.getHouseholdsStreamForUser(currentUser))
           .thenAnswer((_) async* {
         yield [];
       });
+      householdsState = HouseholdsState(
+          inviteCodeRepository: inviteCodeRepo,
+          householdRepository: householdRepo,
+          currentUser: currentUser
+      );
     });
 
     test('Invite code not found during joining household. InvalidInviteCodeException should be thrown.', () {
@@ -36,12 +43,6 @@ void main() {
       .thenAnswer((_) async {
         return null;
       });
-
-      final householdsState = HouseholdsState(
-          inviteCodeRepository: inviteCodeRepo,
-          householdRepository: householdRepo,
-          currentUser: currentUser
-      );
 
       expect(householdsState.joinHousehold('inviteCode123'), throwsA(const TypeMatcher<InvalidInviteCodeException>()));
     });
@@ -69,12 +70,6 @@ void main() {
         );
       });
 
-      final householdsState = HouseholdsState(
-          inviteCodeRepository: inviteCodeRepo,
-          householdRepository: householdRepo,
-          currentUser: currentUser
-      );
-
       await householdsState.joinHousehold('inviteCode123');
 
       verify(householdRepo.updateHousehold(const Household(
@@ -92,12 +87,6 @@ void main() {
           .thenAnswer((_) async {
         return true;
       });
-
-      final householdsState = HouseholdsState(
-          inviteCodeRepository: inviteCodeRepo,
-          householdRepository: householdRepo,
-          currentUser: currentUser
-      );
 
       await householdsState.createHousehold('New household name');
 
@@ -130,12 +119,6 @@ void main() {
             return true;
       });
 
-      final householdsState = HouseholdsState(
-          inviteCodeRepository: inviteCodeRepo,
-          householdRepository: householdRepo,
-          currentUser: currentUser
-      );
-
       await householdsState.createHousehold('New household name');
 
       verify(inviteCodeRepo.createInviteCode(any)).called(3); // First 2 tries failed
@@ -149,12 +132,6 @@ void main() {
           .thenAnswer((_) async {
         return false;
       });
-
-      final householdsState = HouseholdsState(
-          inviteCodeRepository: inviteCodeRepo,
-          householdRepository: householdRepo,
-          currentUser: currentUser
-      );
 
       await householdsState.createHousehold('New household name');
 
@@ -175,6 +152,7 @@ void main() {
       ];
       when(householdRepo.getHouseholdsStreamForUser(currentUser))
           .thenAnswer((_) async* {
+        await Future.delayed(const Duration(milliseconds: 50));
         yield[];
         await Future.delayed(const Duration(milliseconds: 50));
         yield householdList;
