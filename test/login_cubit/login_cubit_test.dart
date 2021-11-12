@@ -73,7 +73,7 @@ void main() {
       expect(loginCubit.state.status, FormzStatus.submissionSuccess);
     });
 
-    test('Unsuccessful login login with valid form.', () async {
+    test('Unsuccessful login with valid form.', () async {
       reset(authRepo);
       when(authRepo.login(email: anyNamed('email'), password: anyNamed('password')))
           .thenAnswer((_) {
