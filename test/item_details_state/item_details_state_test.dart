@@ -11,7 +11,7 @@ import 'item_details_state_test.mocks.dart';
 
 @GenerateMocks([ItemRepository])
 void main() {
-  group('HouseholdDetailsState tests.', () {
+  group('ItemDetailsState tests.', () {
 
     final itemRepo = MockItemRepository();
 

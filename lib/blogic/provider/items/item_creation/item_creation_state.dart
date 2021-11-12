@@ -68,9 +68,8 @@ class ItemCreationState with ChangeNotifier {
   }
 
   Future<void> createItem() async {
-    if(creationInProgress){
-      return;
-    }
+    if(creationInProgress || formStatus == FormzStatus.invalid) return;
+
     creationInProgress = true;
     notifyListeners();
 

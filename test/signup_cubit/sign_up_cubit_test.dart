@@ -10,7 +10,7 @@ import 'sign_up_cubit_test.mocks.dart';
 
 @GenerateMocks([AuthenticationRepository])
 void main() {
-  group('HouseholdDetailsState tests.', () {
+  group('SignupCubit tests.', () {
 
     final authRepo = MockAuthenticationRepository();
     late SignUpCubit signupCubit;

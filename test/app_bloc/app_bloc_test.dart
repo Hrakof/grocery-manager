@@ -9,7 +9,7 @@ import 'app_bloc_test.mocks.dart';
 
 @GenerateMocks([AuthenticationRepository, UserRepository])
 void main() {
-  group('HouseholdDetailsState tests.', () {
+  group('AppBloc tests.', () {
 
     final userRepo = MockUserRepository();
     final authRepo = MockAuthenticationRepository();
