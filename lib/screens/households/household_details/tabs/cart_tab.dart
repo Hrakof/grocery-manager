@@ -24,11 +24,6 @@ class CartTab extends StatelessWidget {
           )
             :
           ScreenTypeLayout(
-            breakpoints: const ScreenBreakpoints(
-                tablet: 600,
-                desktop: 950,
-                watch: 300
-            ),
             mobile: _buildItemList(state, context),
             tablet: _buildItemList(state, context,
                 centerFlex: 3,

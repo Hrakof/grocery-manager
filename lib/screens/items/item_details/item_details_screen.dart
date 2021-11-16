@@ -7,6 +7,7 @@ import 'package:grocery_manager/widgets/rewritable_text.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
   final String householdId;
@@ -57,34 +58,146 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    return ScreenTypeLayout(
+      mobile: _buildItemForm(context,
+        twoColumns: false,
+        bigPadding: false
+      ),
+      tablet: _buildItemForm(context,
+          twoColumns: true,
+          bigPadding: false
+      ),
+      desktop: _buildItemForm(context,
+          twoColumns: true,
+          bigPadding: true
+      ),
+    );
+  }
+
+  Widget _buildItemForm(BuildContext context, { required bool twoColumns, required bool bigPadding}){
+    final l10n = L10n.of(context)!;
+    if(twoColumns){
+      if(bigPadding){
+        return Row(
+          children: [
+            const Expanded(
+              flex: 1,
+              child: SizedBox(),
+            ),
+            Expanded(
+                flex: 2,
+                child: SingleChildScrollView(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(l10n.iconLabel + ':'),
+                              _IconRow(item.iconData),
+                              const SizedBox(height: 10),
+                              Text(l10n.nameLabel + ':'),
+                              _NameRow(item.name),
+                              const SizedBox(height: 10),
+                              Text(l10n.amountLabel + ':'),
+                              _AmountRow(item.amount),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(l10n.unitLabel + ':'),
+                              _UnitRow(item.unit),
+                              const SizedBox(height: 10),
+                              Text(l10n.descriptionLabel + ':'),
+                              _DescriptionRow(item.description),
+                              const SizedBox(height: 10),
+                              Text(l10n.expirationLabel + ':'),
+                              _ExpirationDateRow(item.expirationDate),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ),
+            const Expanded(
+                flex: 1,
+                child: SizedBox(),
+            ),
+          ],
+        );
+      }
+      return SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(l10n.iconLabel + ':'),
+                    _IconRow(item.iconData),
+                    const SizedBox(height: 10),
+                    Text(l10n.nameLabel + ':'),
+                    _NameRow(item.name),
+                    const SizedBox(height: 10),
+                    Text(l10n.amountLabel + ':'),
+                    _AmountRow(item.amount),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(l10n.unitLabel + ':'),
+                    _UnitRow(item.unit),
+                    const SizedBox(height: 10),
+                    Text(l10n.descriptionLabel + ':'),
+                    _DescriptionRow(item.description),
+                    const SizedBox(height: 10),
+                    Text(l10n.expirationLabel + ':'),
+                    _ExpirationDateRow(item.expirationDate),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: _IconRow(item.iconData)
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: _NameRow(item.name)
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: _AmountRow(item.amount)
-          ),
-          Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: _UnitRow(item.unit)
-          ),
-          Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: _DescriptionRow(item.description)
-          ),
-          Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: _ExpirationDateRow(item.expirationDate)
-          ),
-        ],
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.iconLabel + ':'),
+            _IconRow(item.iconData),
+            const SizedBox(height: 10),
+            Text(l10n.nameLabel + ':'),
+            _NameRow(item.name),
+            const SizedBox(height: 10),
+            Text(l10n.amountLabel + ':'),
+            _AmountRow(item.amount),
+            const SizedBox(height: 10),
+            Text(l10n.unitLabel + ':'),
+            _UnitRow(item.unit),
+            const SizedBox(height: 10),
+            Text(l10n.descriptionLabel + ':'),
+            _DescriptionRow(item.description),
+            const SizedBox(height: 10),
+            Text(l10n.expirationLabel + ':'),
+            _ExpirationDateRow(item.expirationDate),
+          ],
+        ),
       ),
     );
   }
@@ -99,7 +212,9 @@ class _NameRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context)!;
     return RewritableText(
-      text: Text(name),
+      text: Text(name,
+        overflow: TextOverflow.ellipsis,
+      ),
       onTextEdited: (newName) {
         if(newName.length < 3){
           final snackBar = SnackBar(content: Text(l10n.tooShort));
@@ -108,7 +223,6 @@ class _NameRow extends StatelessWidget {
           context.read<ItemDetailsState>().changeName(newName);
         }
       },
-      labelText: l10n.nameLabel,
     );
   }
 }
@@ -123,7 +237,9 @@ class _AmountRow extends StatelessWidget {
     final l10n = L10n.of(context)!;
 
     return RewritableText(
-      text: Text(amount?.toString() ?? '-'),
+      text: Text(amount?.toString() ?? '-',
+        overflow: TextOverflow.ellipsis,
+      ),
       onTextEdited: (newAmount){
         double number;
         try{
@@ -140,7 +256,6 @@ class _AmountRow extends StatelessWidget {
           context.read<ItemDetailsState>().changeAmount(number);
         }
       },
-      labelText: l10n.amountLabel,
       textInputType: TextInputType.number,
     );
   }
@@ -155,7 +270,9 @@ class _UnitRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context)!;
     return RewritableText(
-      text: Text(unit ?? '-'),
+      text: Text(unit ?? '-',
+        overflow: TextOverflow.ellipsis,
+      ),
       onTextEdited: (newUnit) {
         if(newUnit.length > 5){
           final snackBar = SnackBar(content: Text(l10n.tooLong));
@@ -164,7 +281,6 @@ class _UnitRow extends StatelessWidget {
           context.read<ItemDetailsState>().changeUnit(newUnit);
         }
       },
-      labelText: l10n.unitLabel,
     );
   }
 }
@@ -178,7 +294,9 @@ class _DescriptionRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context)!;
     return RewritableText(
-      text: Text(description ?? '-'),
+      text: Text(description ?? '-',
+        overflow: TextOverflow.ellipsis,
+      ),
       onTextEdited: (newDescription) {
         if(newDescription.length > 150){
           final snackBar = SnackBar(content: Text(l10n.tooLong));
@@ -187,7 +305,6 @@ class _DescriptionRow extends StatelessWidget {
           context.read<ItemDetailsState>().changeDescription(newDescription);
         }
       },
-      labelText: l10n.descriptionLabel,
     );
   }
 }

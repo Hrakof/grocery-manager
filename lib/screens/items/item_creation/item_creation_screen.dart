@@ -5,6 +5,7 @@ import 'package:grocery_manager/blogic/provider/items/item_creation/formz_inputs
 import 'package:grocery_manager/blogic/provider/items/item_creation/item_creation_state.dart';
 import 'package:grocery_manager/repositories/item/item_repository.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class ItemCreationScreen extends StatelessWidget {
   final String householdId;
@@ -29,14 +30,43 @@ class ItemCreationScreen extends StatelessWidget {
             householdId: householdId,
             itemCollection: itemCollection
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-          child: Flex(
-              direction: Axis.vertical,
-              children:const [Expanded(child: _ItemForm())]
+        child: ScreenTypeLayout(
+          mobile: _buildItemForm(),
+          tablet: _buildItemForm(
+            centerFlex: 3,
+            placeHolderFlex: 1
+          ),
+          desktop: _buildItemForm(
+            centerFlex: 1,
+            placeHolderFlex: 1
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildItemForm({int placeHolderFlex = 0, int centerFlex = 1}){
+    return Row(
+      children: [
+        Expanded(
+          flex: placeHolderFlex,
+          child: const SizedBox()
+        ),
+        Expanded(
+          flex: centerFlex,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            child: Flex(
+              direction: Axis.vertical,
+              children:const [Expanded(child: _ItemForm())]
+            ),
+          ),
+        ),
+        Expanded(
+          flex: placeHolderFlex,
+          child: const SizedBox()
+        ),
+      ],
     );
   }
 }

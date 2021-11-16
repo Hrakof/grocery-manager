@@ -57,11 +57,6 @@ class _HouseholdList extends StatelessWidget {
     }
     else{
       return ScreenTypeLayout(
-        breakpoints: const ScreenBreakpoints(
-          tablet: 600,
-          desktop: 950,
-          watch: 300
-        ),
         mobile: _buildHouseholdList(households, ),
         tablet: _buildHouseholdList(households,
           centerFlex: 3,

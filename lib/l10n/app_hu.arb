@@ -16,6 +16,8 @@
     "invalidDisplayName": "Érvénytelen név",
     "createHouseHoldDialogTitle": "Új háztartás létrehozása",
     "nameLabel": "Név",
+    "iconLabel": "Ikon",
+    "expirationLabel": "Lejárati dátum",
     "cancelButtonText": "MÉGSE",
     "houseHoldsScreenTitle": "Háztartások",
     "logOutMenuItemText": "Kijelentkezés",

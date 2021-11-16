@@ -72,6 +72,14 @@
         "@nameLabel": {
             "description": "Name label."
         },
+    "iconLabel": "Icon",
+        "@iconLabel": {
+            "description": "Icon label."
+        },
+    "expirationLabel": "Expiration date",
+        "@expirationLabel": {
+            "description": "Expiration date label."
+        },
     "cancelButtonText": "CANCEL",
         "@cancelButtonText": {
             "description": "Cancel button text."

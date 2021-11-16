@@ -6,6 +6,7 @@ import 'package:grocery_manager/repositories/repositories.dart';
 import 'package:grocery_manager/routing/route_parser.dart';
 import 'package:grocery_manager/routing/router_delegate.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:provider/provider.dart';
 
 import 'blogic/bloc/app/app_bloc.dart';
 

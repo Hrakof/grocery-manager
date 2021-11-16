@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 class RewritableText extends StatefulWidget {
 
   final Text text;
-  final String labelText;
+  final String? labelText;
   final Function(String) onTextEdited;
   final TextInputType? textInputType;
 
-  const RewritableText({required this.text, required this.onTextEdited, required this.labelText, this.textInputType, Key? key, }) : super(key: key);
+  const RewritableText({required this.text, required this.onTextEdited, this.labelText, this.textInputType, Key? key, }) : super(key: key);
 
 
   @override
@@ -68,7 +68,7 @@ class _RewritableTextState extends State<RewritableText> {
   Widget _defaultRow() {
     return Row(
       children: [
-        widget.text,
+        Flexible(child: widget.text),
         IconButton(
           icon: const Icon(Icons.edit),
           onPressed: () {

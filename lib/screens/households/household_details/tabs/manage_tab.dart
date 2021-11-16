@@ -22,11 +22,6 @@ class ManageTab extends StatelessWidget {
 
     return SingleChildScrollView(
       child: ScreenTypeLayout(
-        breakpoints: const ScreenBreakpoints(
-            tablet: 600,
-            desktop: 950,
-            watch: 300
-        ),
         mobile: _buildContentColumn(state, context),
         tablet: _buildContentColumn(state, context,
             centerFlex: 3,
