@@ -29,6 +29,10 @@ dependencies:
 
   freezed_annotation: ^0.15.0
 
+  #Responsive ui
+  responsive_builder: ^0.4.1
+  flutter_screenutil: ^5.0.0+2
+
   #bloc
   bloc: ^7.2.1
   flutter_bloc: ^7.3.0

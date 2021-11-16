@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:grocery_manager/repositories/repositories.dart';
 import 'package:grocery_manager/routing/route_parser.dart';
@@ -46,16 +47,26 @@ class _AppWidget extends StatelessWidget {
         appBloc: context.read<AppBloc>()
     );
 
-    return MaterialApp.router(
-      title: 'Grocery Manager',
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
-      localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
-      routerDelegate: _routerDelegate,
-      //backButtonDispatcher: ,
-      routeInformationParser: GroceryRouteInformationParser(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      builder: () {
+        return MaterialApp.router(
+          title: 'Grocery Manager',
+          theme: ThemeData(
+            primarySwatch: Colors.amber,
+            appBarTheme: AppBarTheme(
+              titleTextStyle:TextStyle(
+                fontSize: 24.sp,
+              ),
+            ),
+          ),
+          localizationsDelegates: L10n.localizationsDelegates,
+          supportedLocales: L10n.supportedLocales,
+          routerDelegate: _routerDelegate,
+          //backButtonDispatcher: ,
+          routeInformationParser: GroceryRouteInformationParser(),
+        );
+      },
     );
   }
 }

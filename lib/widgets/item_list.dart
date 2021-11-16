@@ -17,12 +17,12 @@ class ItemList extends StatelessWidget {
         DiffUtilSliverList<Item>(
           items: _items,
           builder: (context, item) =>
-              ItemTile(
-                item,
-                isChecked: checkedItemIds.contains(item.id),
-                onItemChecked: onItemChecked,
-                onItemTapped: onItemTapped,
-              ),
+            ItemTile(
+              item,
+              isChecked: checkedItemIds.contains(item.id),
+              onItemChecked: onItemChecked,
+              onItemTapped: onItemTapped,
+            ),
           insertAnimationBuilder: (context, animation, child) =>
             SizeTransition(
               sizeFactor: animation,
@@ -51,49 +51,46 @@ class ItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        border: Border.all(color: Colors.black),
-        color: Colors.amber[100],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: (){
-            onItemTapped?.call(_item);
-          },
-          child: Row(
-            children: [
-              Checkbox(
-                value: isChecked,
-                onChanged: (newValue){
-                  onItemChecked?.call(_item);
-                }
-              ),
-              Icon(_item.iconData),
-              const SizedBox(width: 5),
-              Text(_item.name),
-              if(_item.amount != null) ...[
-                const SizedBox(width: 5),
-                Text(_item.amount.toString()),
-              ],
-              if(_item.unit != null) ...[
-                const SizedBox(width: 5),
-                Text(_item.unit!),
-              ],
-              if(_item.expirationDate != null) ...[
-                const SizedBox(width: 10),
-                const Icon(Icons.calendar_today),
-                Text(_formatter.format(_item.expirationDate!)),
-              ]
-
-            ],
-          ),
+    return InkWell(
+      onTap: (){
+        onItemTapped?.call(_item);
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(color: Colors.black),
+          color: Colors.amber[100],
         ),
-      )
+        child: Row(
+          children: [
+            Checkbox(
+              value: isChecked,
+              onChanged: (newValue){
+                onItemChecked?.call(_item);
+              }
+            ),
+            Icon(_item.iconData),
+            const SizedBox(width: 5),
+            Text(_item.name),
+            if(_item.amount != null) ...[
+              const SizedBox(width: 5),
+              Text(_item.amount.toString()),
+            ],
+            if(_item.unit != null) ...[
+              const SizedBox(width: 5),
+              Text(_item.unit!),
+            ],
+            if(_item.expirationDate != null) ...[
+              const SizedBox(width: 10),
+              const Icon(Icons.calendar_today),
+              Text(_formatter.format(_item.expirationDate!)),
+            ]
+
+          ],
+        )
+      ),
     );
   }
 }

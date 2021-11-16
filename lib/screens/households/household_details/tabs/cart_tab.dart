@@ -7,6 +7,7 @@ import 'package:grocery_manager/widgets/confirm_dialog.dart';
 import 'package:grocery_manager/widgets/item_list.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class CartTab extends StatelessWidget {
   const CartTab({Key? key}) : super(key: key);
@@ -22,21 +23,21 @@ class CartTab extends StatelessWidget {
               child: CircularProgressIndicator(),
           )
             :
-          ItemList(
-            state.cartItems!,
-            checkedItemIds: state.selectedCartItemIds,
-            onItemChecked: (item){
-              state.itemChecked(item.id, ItemCollection.cart);
-            },
-            onItemTapped: (item){
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                return ItemDetailsScreen(
-                  householdId: state.household!.id,
-                  itemCollection: ItemCollection.cart,
-                  itemId: item.id,
-                );
-              }));
-            },
+          ScreenTypeLayout(
+            breakpoints: const ScreenBreakpoints(
+                tablet: 600,
+                desktop: 950,
+                watch: 300
+            ),
+            mobile: _buildItemList(state, context),
+            tablet: _buildItemList(state, context,
+                centerFlex: 3,
+                placeHolderFlex: 1
+            ),
+            desktop: _buildItemList(state, context,
+                centerFlex: 1,
+                placeHolderFlex: 1
+            ),
           ),
         if(state.household != null)
           Positioned(
@@ -81,5 +82,38 @@ class CartTab extends StatelessWidget {
     );
   }
 
+  Widget _buildItemList(HouseholdDetailsState state, BuildContext context, {int placeHolderFlex = 0, int centerFlex = 1}){
+    return Row(
+      children: [
+        Expanded(
+            flex: placeHolderFlex,
+            child: const SizedBox()
+        ),
+        Expanded(
+          flex: centerFlex,
+          child: ItemList(
+            state.cartItems!,
+            checkedItemIds: state.selectedCartItemIds,
+            onItemChecked: (item){
+              state.itemChecked(item.id, ItemCollection.cart);
+            },
+            onItemTapped: (item){
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                return ItemDetailsScreen(
+                  householdId: state.household!.id,
+                  itemCollection: ItemCollection.cart,
+                  itemId: item.id,
+                );
+              }));
+            },
+          ),
+        ),
+        Expanded(
+            flex: placeHolderFlex,
+            child: const SizedBox()
+        ),
+      ],
+    );
+  }
 
 }

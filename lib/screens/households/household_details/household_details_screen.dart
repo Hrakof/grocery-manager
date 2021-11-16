@@ -9,6 +9,7 @@ import 'package:grocery_manager/screens/households/household_details/tabs/manage
 import 'package:grocery_manager/widgets/options_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class HouseholdDetailsScreen extends StatelessWidget {
@@ -26,11 +27,11 @@ class HouseholdDetailsScreen extends StatelessWidget {
       length: 3,
       child: ChangeNotifierProvider(
         create: (BuildContext context) => HouseholdDetailsState(
-            householdId: _selectedHouseHoldId,
-            householdRepository: context.read<HouseholdRepository>(),
-            inviteCodeRepository: context.read<InviteCodeRepository>(),
-            itemRepository: context.read<ItemRepository>(),
-            userRepository: context.read<UserRepository>(),
+          householdId: _selectedHouseHoldId,
+          householdRepository: context.read<HouseholdRepository>(),
+          inviteCodeRepository: context.read<InviteCodeRepository>(),
+          itemRepository: context.read<ItemRepository>(),
+          userRepository: context.read<UserRepository>(),
         ),
         child: Consumer<HouseholdDetailsState>(
           builder: (context, state, child){
@@ -56,14 +57,28 @@ class HouseholdDetailsScreen extends StatelessWidget {
               ],
               bottom: TabBar(
                 tabs: [
-                  Tab(text: l10n.cartTabTitle),
-                  Tab(text: l10n.fridgeTabTitle),
-                  Tab(text: l10n.manageTabTitle),
+                  Tab(
+                    child: Text(
+                      l10n.cartTabTitle,
+                      style: TextStyle(fontSize: 24.sp),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      l10n.fridgeTabTitle,
+                      style: TextStyle(fontSize: 24.sp),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      l10n.manageTabTitle,
+                      style: TextStyle(fontSize: 24.sp),
+                    ),
+                  ),
                 ],
               ),
             ),
             body: const TabBarView(
-              //physics: const NeverScrollableScrollPhysics(),
               children: [
                 CartTab(),
                 FridgeTab(),

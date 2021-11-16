@@ -9,6 +9,7 @@ import 'package:grocery_manager/repositories/household/household_repository.dart
 import 'package:grocery_manager/repositories/invite_code/invite_code_repository.dart';
 import 'package:grocery_manager/widgets/options_menu.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'household_details/household_details_screen.dart';
 
@@ -52,22 +53,57 @@ class _HouseholdList extends StatelessWidget {
   Widget build(BuildContext context) {
     final households = context.watch<HouseholdsState>().households;
     if(households == null) {
-      return const CircularProgressIndicator();
+      return const Center(child: CircularProgressIndicator());
     }
     else{
-      return ListView.builder(
-        itemCount: households.length + 1,
-        shrinkWrap: true,
-        itemBuilder: (context, idx){
-          if(idx == households.length){
-            return const _AddOrCreateTile();
-          }
-          final household = households[idx];
-          return _HouseholdTile(household: household);
-        }
+      return ScreenTypeLayout(
+        breakpoints: const ScreenBreakpoints(
+          tablet: 600,
+          desktop: 950,
+          watch: 300
+        ),
+        mobile: _buildHouseholdList(households, ),
+        tablet: _buildHouseholdList(households,
+          centerFlex: 3,
+          placeHolderFlex: 1
+        ),
+        desktop: _buildHouseholdList(households,
+          centerFlex: 2,
+          placeHolderFlex: 1
+        ),
       );
     }
   }
+
+  Widget _buildHouseholdList(List<Household> households, {int placeHolderFlex = 0, int centerFlex = 1}){
+    return Row(
+      children: [
+        Expanded(
+            flex: placeHolderFlex,
+            child: const SizedBox()
+        ),
+        Expanded(
+          flex: centerFlex,
+          child: ListView.builder(
+              itemCount: households.length + 1,
+              shrinkWrap: true,
+              itemBuilder: (context, idx){
+                if(idx == households.length){
+                  return const _AddOrCreateTile();
+                }
+                final household = households[idx];
+                return _HouseholdTile(household: household);
+              }
+          ),
+        ),
+        Expanded(
+            flex: placeHolderFlex,
+            child: const SizedBox()
+        ),
+      ],
+    );
+  }
+
 }
 
 class _HouseholdTile extends StatelessWidget {
