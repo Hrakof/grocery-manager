@@ -47,7 +47,7 @@ class _AppWidget extends StatelessWidget {
     );
 
     return MaterialApp.router(
-      title: 'Grocery Manager',//TODO l10n
+      title: 'Grocery Manager',
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),

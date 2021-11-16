@@ -33,6 +33,11 @@ class SignUpScreen extends StatelessWidget{
 class _SignUpForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
+
+    final centerFlex =      media.size.width < 600 ? 1 : media.size.width < 1000 ? 3 : media.size.width < 1500 ? 1 : 1;
+    final placeHolderFlex = media.size.width < 600 ? 0 : media.size.width < 1000 ? 1 : media.size.width < 1500 ? 1 : 2;
+
     return BlocListener<SignUpCubit, SignUpState>(
       listener: (context, state){
         if(state.status == FormzStatus.submissionFailure){
@@ -41,19 +46,36 @@ class _SignUpForm extends StatelessWidget {
             ..showSnackBar(SnackBar(content: Text(state.errorMessage),));
         }
       },
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _EmailInput(),
-            const SizedBox(height: 8.0),
-            _DisplayNameInput(),
-            const SizedBox(height: 8.0),
-            _PasswordInput(),
-            const SizedBox(height: 8.0),
-            _VerifyPasswordInput(),
-            const SizedBox(height: 8.0),
-            _SignUpButton(),
-          ],
+      child: Center(
+        child: SingleChildScrollView(
+          child: Row(
+            children: [
+              Expanded(
+                flex: placeHolderFlex,
+                child: const SizedBox(),
+              ),
+              Expanded(
+                flex: centerFlex,
+                child: Column(
+                  children: [
+                    _EmailInput(),
+                    const SizedBox(height: 8.0),
+                    _DisplayNameInput(),
+                    const SizedBox(height: 8.0),
+                    _PasswordInput(),
+                    const SizedBox(height: 8.0),
+                    _VerifyPasswordInput(),
+                    const SizedBox(height: 8.0),
+                    _SignUpButton(),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: placeHolderFlex,
+                child: const SizedBox(),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -36,6 +36,11 @@ class LoginScreen extends StatelessWidget {
 class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
+
+    final centerFlex =      media.size.width < 600 ? 1 : media.size.width < 1000 ? 3 : media.size.width < 1500 ? 1 : 1;
+    final placeHolderFlex = media.size.width < 600 ? 0 : media.size.width < 1000 ? 1 : media.size.width < 1500 ? 1 : 2;
+
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state){
         if(state.status == FormzStatus.submissionFailure){
@@ -44,25 +49,42 @@ class _LoginForm extends StatelessWidget {
             ..showSnackBar(SnackBar(content: Text(state.errorMessage),));
         }
       },
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/images/firebase_logo.png',
-              scale: 3,
-            ),
-            _EmailInput(),
-            const SizedBox(height: 8.0),
-            _PasswordInput(),
-            const SizedBox(height: 8.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _SignUpButton(),
-                _LoginButton(),
-              ],
-            ),
-          ],
+      child: Center(
+        child: SingleChildScrollView(
+          child: Row(
+            children: [
+              Expanded(
+                flex: placeHolderFlex,
+                child: const SizedBox(),
+              ),
+              Expanded(
+                flex: centerFlex,
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/firebase_logo.png',
+                      scale: 3,
+                    ),
+                    _EmailInput(),
+                    const SizedBox(height: 8.0),
+                    _PasswordInput(),
+                    const SizedBox(height: 8.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _SignUpButton(),
+                        _LoginButton(),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: placeHolderFlex,
+                child: const SizedBox(),
+              ),
+            ],
+          ),
         ),
       ),
     );
