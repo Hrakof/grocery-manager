@@ -11,19 +11,27 @@ class GroceryRouterDelegate extends RouterDelegate<RouteEnum>
 
   late StreamSubscription _bolcSub;
   AppState _savedAppState;
+  RouteEnum? _currentConfiguration;
+  final AppBloc _appBloc;
 
   GroceryRouterDelegate({ required AppBloc appBloc}):
-        _savedAppState = appBloc.state
+        _savedAppState = appBloc.state,
+        _appBloc = appBloc
   {
     _bolcSub = appBloc.stream.listen((newAppState) {
+      _setCurrentConfiguration();
       //azért runtimeType, mert ha a user adatai megváltoznak
       // AuthenticatedAppState-en belül, attól még nem kell navigálni
       if(newAppState.runtimeType != _savedAppState.runtimeType){
         _savedAppState = newAppState;
+        _setCurrentConfiguration();
         notifyListeners();
       }
     });
   }
+
+  @override
+  RouteEnum? get currentConfiguration => _currentConfiguration;
 
   @override
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -43,12 +51,9 @@ class GroceryRouterDelegate extends RouterDelegate<RouteEnum>
         ),
       ],
       onPopPage: (route, result) {
-        print('--- onPopPage1');
         if (!route.didPop(result)) {
           return false;
         }
-        print('--- onPopPage2');
-        //TODO ???
         notifyListeners();
 
         return true;
@@ -56,17 +61,26 @@ class GroceryRouterDelegate extends RouterDelegate<RouteEnum>
     );
   }
 
+  void _setCurrentConfiguration(){
+    if (_savedAppState is AuthenticatedAppState){
+      _currentConfiguration = RouteEnum.home;
+    }
+    else if (_savedAppState is UnAuthenticatedAppState){
+      _currentConfiguration = RouteEnum.login;
+    }else {
+      _currentConfiguration = RouteEnum.unknown;
+    }
+  }
+
   @override
   Future<void> setNewRoutePath(RouteEnum configuration) async {
-    print('--- setNewRoutePath: $configuration');
-    if (configuration == RouteEnum.login){
-      //TODO send logout request?
+    if(configuration == RouteEnum.login){
+      _appBloc.add(const LogoutRequestedEvent());
     }
   }
 
   @override
   void dispose() {
-    print("--- Navigator dispose");
     _bolcSub.cancel();
     super.dispose();
   }

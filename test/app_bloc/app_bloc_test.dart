@@ -40,6 +40,10 @@ void main() {
       await Future.delayed(const Duration(milliseconds: 100));
     });
 
+    tearDown(() {
+      appBloc.close();
+    });
+
     test('State setup.', () async {
       expect(appBloc.state, const TypeMatcher<UnAuthenticatedAppState>());
     });

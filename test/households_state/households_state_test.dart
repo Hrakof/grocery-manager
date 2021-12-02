@@ -37,6 +37,10 @@ void main() {
       );
     });
 
+    tearDown((){
+      householdsState.dispose();
+    });
+
     test('Invite code not found during joining household. InvalidInviteCodeException should be thrown.', () {
 
       when(inviteCodeRepo.getInviteCodeByValue('inviteCode123'))

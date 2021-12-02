@@ -195,18 +195,6 @@ void main() {
       ))).called(1);
     });
 
-    test('Member leaves the household.', () async {
-
-      await householdDetailsState.leaveHousehold(member.id);
-
-      verify(householdRepo.updateHousehold(Household(
-        id: household.id,
-        name: household.name,
-        ownerUid: household.ownerUid,
-        memberUids: [owner.id],
-      ))).called(1);
-    });
-
     test('Owner can delete the household.', () async {
 
       await householdDetailsState.deleteHousehold(owner.id);

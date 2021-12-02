@@ -10,8 +10,7 @@ enum RouteEnum {
 
 class GroceryRouteInformationParser extends RouteInformationParser<RouteEnum> {
   @override
-  Future<RouteEnum> parseRouteInformation(
-      RouteInformation routeInformation) async {
+  Future<RouteEnum> parseRouteInformation(RouteInformation routeInformation) async {
 
     final uri = Uri.parse(routeInformation.location!);
 
