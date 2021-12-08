@@ -112,7 +112,7 @@ class _DisplayNameInput extends StatelessWidget {
         return TextField(
           onChanged: (value){ context.read<SignUpCubit>().displayNameChanged(value); },
           decoration: InputDecoration(
-            icon: const Icon(Icons.book), //TODO jobb icon
+            icon: const Icon(Icons.book),
             labelText: l10n.displayNameLabel,
             helperText: '',
             errorText: state.displayName.invalid ? l10n.invalidDisplayName : null,

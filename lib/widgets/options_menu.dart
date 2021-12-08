@@ -24,7 +24,7 @@ class OptionsMenu extends StatelessWidget{
       onSelected: (selected){
         switch (selected){
           case _MenuOptions.logOut:
-            context.read<AppBloc>().add(LogoutRequestedEvent());
+            context.read<AppBloc>().add(const LogoutRequestedEvent());
             break;
         }
       },

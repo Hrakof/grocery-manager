@@ -57,6 +57,7 @@ class _AppWidget extends StatelessWidget {
             primarySwatch: Colors.amber,
             appBarTheme: AppBarTheme(
               titleTextStyle:TextStyle(
+                color: Colors.black,
                 fontSize: 24.sp,
               ),
             ),

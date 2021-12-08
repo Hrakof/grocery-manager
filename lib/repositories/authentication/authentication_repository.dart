@@ -26,7 +26,6 @@ class AuthenticationRepository {
 
   AuthenticationRepository(this._userRepository){
     _fbStreamSubscription = _firebaseAuth.authStateChanges().listen((fbUser) async {
-      print('--- auth state changes: ${fbUser?.uid}');
       if(fbUser == null){
         _userStreamController.add('');
         return;

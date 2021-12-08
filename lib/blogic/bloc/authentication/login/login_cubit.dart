@@ -42,8 +42,7 @@ class LoginCubit extends Cubit<LoginState> {
         errorMessage: e.message,
       ));
     }
-    on Exception catch (e){
-      print('--- login error: $e');
+    on Exception{
       emit(state.copyWith(
         status: FormzStatus.submissionFailure,
         errorMessage: 'Unkown error',
