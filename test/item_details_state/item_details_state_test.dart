@@ -77,6 +77,11 @@ void main() {
       await Future.delayed(const Duration(milliseconds: 100));
     });
 
+    tearDown((){
+      cartItemDetailsState.dispose();
+      fridgeItemDetailsState.dispose();
+    });
+
     test('State setup. State gets set up correctly after item data arrives and listeners are notified.', () async {
 
       expect(cartItemDetailsState.item, cartItem);

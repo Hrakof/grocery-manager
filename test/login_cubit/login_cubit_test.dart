@@ -20,6 +20,10 @@ void main() {
       loginCubit = LoginCubit(authRepo);
     });
 
+    tearDown((){
+      loginCubit.close();
+    });
+
     test('State setup.', () {
       expect(loginCubit.state.email , const Email.pure());
       expect(loginCubit.state.password , const Password.pure());

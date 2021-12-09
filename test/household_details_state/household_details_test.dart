@@ -90,6 +90,10 @@ void main() {
       await Future.delayed(const Duration(milliseconds: 100));
     });
 
+    tearDown(() {
+      householdDetailsState.dispose();
+    });
+
     test('State setup. State gets set up correctly after household data and item lists arrive and listeners are notified.', () async {
       //state is created here, so the listener can count
       householdDetailsState = HouseholdDetailsState(
